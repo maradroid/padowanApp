@@ -1,4 +1,4 @@
-package com.padowan.app.utils;
+package com.padowan.app.model.utils;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -1,10 +1,14 @@
 package com.padowan.app.activites.home;
 
+import com.padowan.app.model.data_model.Player;
+
+import java.util.List;
+
 /**
  * Created by Mario Bat on 1.3.2017..
  */
 
 public interface CallLog {
-    void onResponse(String response);
+    void onPlayerResponse(String player);
     void onFailure(String error);
 }

@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.padowan.app.R;
+import com.padowan.app.model.data_model.Player;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements CallLog {
 
@@ -20,8 +23,8 @@ public class MainActivity extends AppCompatActivity implements CallLog {
     }
 
     @Override
-    public void onResponse(String response) {
-        Log.d(TAG, response);
+    public void onPlayerResponse(String player) {
+        Log.d(TAG, player);
     }
 
     @Override

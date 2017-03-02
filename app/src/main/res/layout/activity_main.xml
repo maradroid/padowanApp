@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="22dp"
-        android:text="IME IGRAČA:"
+        android:text="@string/PlayerName"
         android:background="#000"
         android:textColor="#fff"
         android:layout_centerHorizontal="true"

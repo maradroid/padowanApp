@@ -10,5 +10,7 @@ import java.util.List;
 
 public interface CallLog {
     void onPlayerResponse(String player);
+    void onTeamResponse (String Team);
+    void onCrimeResponse (String Crime);
     void onFailure(String error);
 }

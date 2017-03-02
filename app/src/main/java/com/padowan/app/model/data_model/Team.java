@@ -1,32 +1,21 @@
 package com.padowan.app.model.data_model;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
- * Created by Korisnik on 1.3.2017..
+ * Created by Korisnik on 2.3.2017..
  */
 
-public class Player {
-    @SerializedName("Name")
-    private String name;
+import com.google.gson.annotations.SerializedName;
+
+public class Team {
+
     @SerializedName("Team")
     private String team;
     @SerializedName("Team_name")
     private String teamName;
     @SerializedName("Team_city")
     private String teamCity;
-    @SerializedName("Position")
-    private String position;
     @SerializedName("arrest_count")
     private int arrestCount;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getTeam() {
         return team;
@@ -52,14 +41,6 @@ public class Player {
         this.teamCity = teamCity;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public int getArrestCount() {
         return arrestCount;
     }
@@ -67,4 +48,5 @@ public class Player {
     public void setArrestCount(int arrestCount) {
         this.arrestCount = arrestCount;
     }
+
 }

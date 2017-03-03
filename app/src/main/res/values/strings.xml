@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">padowanApp</string>
-    <string name="PlayerName">Ime igrača</string>
-    <string name="WurstClub">Najkažnjavaniji klub</string>
-    <string name="Crime">Najčešći uzrok kriminala</string>
+    <string name="player_name"><b>Ime igrača</b></string>
+    <string name="wurst_club"><b>Najkažnjavaniji klub</b></string>
+    <string name="crime"><b>Najčešći uzrok kriminala</b></string>
+    <string name="btn">BTN</string>
+    <string name="show_data">Prikaži podatke</string>
+    <string name="show_player_crime">Prikaži prijestupe igrača</string>
+    <string name="show_all_crime">Prikaži sve prijestupe</string>
+    <string name="show_blabla">blablabla</string>
 </resources>

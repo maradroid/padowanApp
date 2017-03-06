@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * Created by Korisnik on 6.3.2017..
  */
 
-public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerViewAdapterCrimes.MyHolder>{
+public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     public static final int ITEM_TYPE = 0;
     public static final int ITEM_HEADER =1;
@@ -29,36 +29,38 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public int getItemViewType(int position) {
-        if(allCrimeList instanceof MyHolder)
+        if(allCrimeList.get(position) instanceof MyHolder)
             return ITEM_TYPE;
         else
             return ITEM_HEADER;
     }
 
     @Override
-    public RecyclerViewAdapterCrimes.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if(viewType == ITEM_TYPE) {
             View viewItem = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.text_view_holder_all_crimes_item, parent, false);
 
-            return new RecyclerViewAdapterCrimes.MyHolder(viewItem);
+            return new MyHolder(viewItem);
         }
         else {
             View viewHeader = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.text_view_holder_all_crimes_header, parent, false);
-            return new RecyclerViewAdapterCrimes.MyHolder(viewHeader);
+            return new MyHolderHeader(viewHeader);
         }
     }
 
     @Override
-    public void onBindViewHolder(RecyclerViewAdapterCrimes.MyHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int itemType = getItemViewType(position);
         if(itemType == ITEM_TYPE){
-            holder.tvListAllCrimes.setText(allCrimeList.get(position).getCategory());
+            MyHolder myHolder = (MyHolder) holder;
+            myHolder.tvListAllCrimesItem.setText(allCrimeList.get(position).getCategory());
         }
         else{
+            MyHolderHeader myHolder = (MyHolderHeader) holder;
             char firstLetter = allCrimeList.toString().charAt(0);
-            holder.tvListAllCrimes.setText(firstLetter);
+            myHolder.tvListAllCrimesHeader.setText(firstLetter);
         }
     }
 
@@ -78,7 +80,7 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
     public class MyHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_list_all_crimes_item)
-        TextView tvListAllCrimes;
+        TextView tvListAllCrimesItem;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -91,12 +93,13 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
     }
 }
 
-     class MyholderHeader extends RecyclerView.ViewHolder {
+     class MyHolderHeader extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_all_crimes_header)
-        TextView tvListAllCrimesHeader;
+         @BindView(R.id.tv_all_crimes_header)
+         TextView tvListAllCrimesHeader;
 
-        public MyholderHeader(View itemView) {
+        public MyHolderHeader(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }

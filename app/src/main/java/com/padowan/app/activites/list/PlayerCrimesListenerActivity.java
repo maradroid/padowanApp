@@ -51,6 +51,7 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
         }
 
         recyclerViewPresenter = new RecyclerViewPresenter();
+        //TODO: rijesi pozive, postaviti uvjete
         recyclerViewPresenter.getPlayerCrimes(this, name);
         recyclerViewPresenter.getAllCrimes(this);
 
@@ -60,6 +61,7 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
     @Override
     public void onSuccess(List<Crime> crimeList) {
         mAdapter.setData(crimeList);
+        //TODO: rijesi adaptere, oba moraju biti pozvana nekim uvjetima
         if(crimesAdapter != null) {
             crimesAdapter.setData(crimeList);
         }

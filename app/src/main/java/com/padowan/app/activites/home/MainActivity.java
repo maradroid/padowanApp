@@ -13,11 +13,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.padowan.app.R.id.tv_player;
+
 public class MainActivity extends AppCompatActivity implements HomeListener {
 
     private static final String TAG = "MainActivity";
 
-    @BindView(R.id.tv_player)
+    @BindView(tv_player)
     TextView playerName;
     @BindView(R.id.tv_team)
     TextView teamName;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements HomeListener {
     TextView crimeName;
     @BindView(R.id.button)
     Button button1;
+    @BindView(R.id.button3)
+    Button buttonAllCrimes;
     private boolean playerExe = false;
     private boolean crimeExe = false;
     private boolean teamExe = false;
@@ -59,10 +63,22 @@ public class MainActivity extends AppCompatActivity implements HomeListener {
 
     @OnClick(R.id.button2)
     public void OnPlayerCrimes(){
-        Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
-        i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, playerName.getText().toString());
-        startActivity(i);
+        if(playerName != null && playerName.getText().length() != 0) {
+            Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
+            i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, playerName.getText().toString());
+            startActivity(i);
+        }
     }
+
+    @OnClick(R.id.button3)
+    public void OnAllCrimes(){
+        if(playerName != null && playerName.getText().length() != 0) {
+            Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
+            i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, "");
+            startActivity(i);
+        }
+    }
+
     @Override
     public void onPlayerResponse(String player) {
         playerName.setText(player);

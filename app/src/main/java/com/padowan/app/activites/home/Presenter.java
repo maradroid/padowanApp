@@ -116,8 +116,4 @@ public class Presenter {
         });
     }
 
-   /* public String  getPlayer() {
-        return player;
-    }*/
-    
 }

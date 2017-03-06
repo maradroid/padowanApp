@@ -1,7 +1,6 @@
 package com.padowan.app.activites.list;
 
-import com.padowan.app.activites.home.CallLog;
-import com.padowan.app.model.data_model.Player;
+import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.utils.RetroUtil;
 
 import java.util.List;
@@ -16,19 +15,19 @@ import retrofit2.Response;
 
 public class RecyclerViewPresenter {
 
-    private Call<List<Player>> callPlayerCrimes;
+    private Call<List<Crime>> callPlayerCrimes;
 
-    public void getPlayerCrimes(final CallLog listenerPlayer) {
-        callPlayerCrimes = RetroUtil.getService().readAllCrimes();
-        callPlayerCrimes.enqueue(new Callback<List<Player>>() {
+    public void getPlayerCrimes(final PlayerCrimesListener listener, String name) {
+        callPlayerCrimes = RetroUtil.getService().readAllCrimes(name);
+        callPlayerCrimes.enqueue(new Callback<List<Crime>>() {
             @Override
-            public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
-
-            });
+            public void onResponse(Call<List<Crime>> call, Response<List<Crime>> response) {
+                listener.onSuccess(response.body());
+            }
 
             @Override
-            public void onFailure(Call<List<Player>> call, Throwable t) {
-                listenerPlayer.onFailure(t.getMessage());
+            public void onFailure(Call<List<Crime>> call, Throwable t) {
+                listener.onFail(t.getMessage());
             }
         });
     }

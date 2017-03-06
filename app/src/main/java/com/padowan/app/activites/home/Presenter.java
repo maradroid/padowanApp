@@ -5,8 +5,6 @@ import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
 import com.padowan.app.model.utils.RetroUtil;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,11 +15,12 @@ import retrofit2.Response;
 /**
  * Created by Mario Bat on 1.3.2017..
  */
-public class Presenter extends MainActivity{
+public class Presenter {
 
     private Call<List<Player>> callPlayer;
     private Call<List<Crime>> callCrime;
     private Call<List<Team>> callTeam;
+    //private String player;
 
     public void stopCall(){
         if(callPlayer != null)
@@ -34,22 +33,24 @@ public class Presenter extends MainActivity{
 
     //prosljeđeni interface mora biti final jer mu se pristupa iz anonimne klase
 
-            public void getPlayers(final CallLog listenerPlayer) {
-                callPlayer = RetroUtil.getService().readPlayer();
-                callPlayer.enqueue(new Callback<List<Player>>() {
-                    @Override
-                    public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
-                        List<Player> responsePlayerList = response.body();
-                        //listener.onPlayerResponse(responseList);
-                        Player worstPlayer = responsePlayerList.get(0);
+    public void getPlayers(final HomeListener listenerPlayer) {
+        callPlayer = RetroUtil.getService().readPlayer();
+        callPlayer.enqueue(new Callback<List<Player>>() {
+            @Override
+            public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
+                List<Player> responsePlayerList = response.body();
+                //listener.onPlayerResponse(responseList);
+                Player worstPlayer = responsePlayerList.get(0);
 
-                        for (Player tempPlayer : responsePlayerList) {
-                            if (worstPlayer.getArrestCount() < tempPlayer.getArrestCount()) {
-                                worstPlayer = tempPlayer;
-                            }
-                        }
-                        listenerPlayer.onPlayerResponse(worstPlayer.getName());
+                for (Player tempPlayer : responsePlayerList) {
+                    if (worstPlayer.getArrestCount() < tempPlayer.getArrestCount()) {
+                        worstPlayer = tempPlayer;
                     }
+                }
+                listenerPlayer.onPlayerResponse(worstPlayer.getName());
+                //player = worstPlayer.getName();
+            }
+
             @Override
             public void onFailure(Call<List<Player>> call, Throwable t) {
                 listenerPlayer.onFailure(t.getMessage());
@@ -57,7 +58,7 @@ public class Presenter extends MainActivity{
         });
     }
 
-    public void getCrime (final CallLog listenerCrime) {
+    public void getCrime (final HomeListener listenerCrime) {
         callCrime = RetroUtil.getService().readCrime();
         callCrime.enqueue(new Callback<List<Crime>>() {
             @Override
@@ -90,7 +91,7 @@ public class Presenter extends MainActivity{
         });
     }
 
-    public void getTeam(final CallLog listenerTeam) {
+    public void getTeam(final HomeListener listenerTeam) {
         callTeam = RetroUtil.getService().readTeam();
         callTeam.enqueue(new Callback<List<Team>>() {
             @Override
@@ -114,5 +115,9 @@ public class Presenter extends MainActivity{
             }
         });
     }
+
+   /* public String  getPlayer() {
+        return player;
+    }*/
     
 }

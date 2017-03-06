@@ -7,13 +7,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.padowan.app.R;
-import com.padowan.app.activites.list.PlayerCrimesActivity;
+import com.padowan.app.activites.list.PlayerCrimesListenerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements CallLog {
+public class MainActivity extends AppCompatActivity implements HomeListener {
 
     private static final String TAG = "MainActivity";
 
@@ -57,13 +57,16 @@ public class MainActivity extends AppCompatActivity implements CallLog {
         }
     }
 
+    @OnClick(R.id.button2)
+    public void OnPlayerCrimes(){
+        Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
+        i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, playerName.getText().toString());
+        startActivity(i);
+    }
     @Override
     public void onPlayerResponse(String player) {
         playerName.setText(player);
         playerExe = false;
-        Intent i = new Intent(getApplicationContext(), PlayerCrimesActivity.class);
-        i.putExtra("key", player);
-        startActivity(i);
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Mario Bat on 1.3.2017..
  */
 
-public interface CallLog {
+public interface HomeListener {
     void onPlayerResponse(String player);
     void onTeamResponse (String Team);
     void onCrimeResponse (String Crime);

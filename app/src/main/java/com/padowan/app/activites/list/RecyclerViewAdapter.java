@@ -26,4 +26,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public int getItemCount() {
         return 0;
     }
+
+    class MyHolder extends RecyclerView.ViewHolder{
+
+        public MyHolder(View itemView) {
+            super(itemView);
+        }
+    }
 }

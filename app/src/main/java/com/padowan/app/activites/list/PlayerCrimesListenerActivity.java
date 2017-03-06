@@ -5,20 +5,28 @@ import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
 import com.padowan.app.R;
+import com.padowan.app.model.data_model.Crime;
 
-public class PlayerCrimesActivity extends AppCompatActivity {
+import java.util.List;
+
+public class PlayerCrimesListenerActivity extends AppCompatActivity implements PlayerCrimesListener {
+
+    public static  final String TAG_KEY = "key";
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-
     private String name;
+    private RecyclerViewPresenter recyclerViewPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_crimes);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        recyclerViewPresenter = new RecyclerViewPresenter();
 
         mRecyclerView.setHasFixedSize(true);
 
@@ -26,12 +34,18 @@ public class PlayerCrimesActivity extends AppCompatActivity {
         mAdapter = new RecyclerViewAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-        Bundle extras = getIntent().getExtras();
-        name = extras.getString("key");
+        name = getIntent().getStringExtra(TAG_KEY);
     }
 
-    private String setName(){
-        return name;
+
+    @Override
+    public void onSuccess(List<Crime> crimeList) {
+
+    }
+
+    @Override
+    public void onFail(String error) {
+
     }
 }
 

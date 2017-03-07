@@ -1,10 +1,13 @@
 package com.padowan.app.activites.list;
 
+import com.padowan.app.activites.list.adapter.ListRecyclerWraper;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.utils.RetroUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,7 +28,7 @@ public class RecyclerViewPresenter {
         callPlayerCrimes.enqueue(new Callback<List<Crime>>() {
             @Override
             public void onResponse(Call<List<Crime>> call, Response<List<Crime>> response) {
-                listener.onSuccess(response.body());
+                listener.onSuccessPlayerCrime(response.body());
             }
 
             @Override
@@ -33,6 +36,10 @@ public class RecyclerViewPresenter {
                 listener.onFail(t.getMessage());
             }
         });
+    }
+
+    public void add(ListRecyclerWraper e) {
+
     }
 
     public void getAllCrimes(final PlayerCrimesListener listener) {
@@ -47,9 +54,20 @@ public class RecyclerViewPresenter {
                     public int compare(Crime o1, Crime o2) {
                         return o1.getCategory().compareTo(o2.getCategory());
                     }
-
                 });
-                listener.onSuccess(responseCrimeList);
+
+                List<ListRecyclerWraper> recyclerList = new ArrayList<ListRecyclerWraper>();
+                char firstLetter = '$';
+
+                for(Crime crime : responseCrimeList) {
+                    if (crime.getCategory().charAt(0) != firstLetter) {
+                        firstLetter = crime.getCategory().charAt(0);
+                        recyclerList.add(new ListRecyclerWraper(String.valueOf(firstLetter), ListRecyclerWraper.TYPE_HEADER));
+                    }
+                    recyclerList.add(new ListRecyclerWraper(crime, ListRecyclerWraper.TYPE_ITEM));
+
+                }
+                listener.onSuccessCrime(recyclerList);
             }
 
             @Override

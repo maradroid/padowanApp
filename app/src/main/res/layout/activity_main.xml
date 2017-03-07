@@ -34,6 +34,13 @@
         android:layout_below="@+id/button2"
         />
 
+    <Button
+        android:id="@+id/button4"
+        style="@style/ButtonShapeSmall"
+        android:background="@drawable/button_shape"
+        android:text="@string/all_teams"
+        android:layout_below="@+id/tv_team"/>
+
     <TextView
         android:id="@+id/tv_team"
         style="@style/LabelShow"
@@ -44,7 +51,7 @@
         android:id="@+id/tv_label_crime"
         style="@style/LabelText"
         android:text="@string/crime"
-        android:layout_below="@+id/tv_team"
+        android:layout_below="@+id/button4"
         />
 
     <TextView

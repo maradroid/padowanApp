@@ -11,6 +11,7 @@ import com.padowan.app.model.data_model.Crime;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,46 +22,34 @@ import butterknife.ButterKnife;
 
 public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    public static final int ITEM_TYPE = 0;
-    public static final int ITEM_HEADER =1;
-
-    private List<Crime> allCrimeList = new ArrayList<>();
+    private List<ListRecyclerWraper> allCrimeList = new ArrayList<>();
     private RecyclerClickListener listener;
 
     @Override
     public int getItemViewType(int position) {
-        if(allCrimeList.get(position) instanceof MyHolder)
-            return ITEM_TYPE;
-        else
-            return ITEM_HEADER;
+        return allCrimeList.get(position).getType();
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == ITEM_TYPE) {
-            View viewItem = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.text_view_holder_all_crimes_item, parent, false);
-
+        View viewItem = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
+        if(viewType == ListRecyclerWraper.TYPE_ITEM) {
             return new MyHolder(viewItem);
-        }
-        else {
-            View viewHeader = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.text_view_holder_all_crimes_header, parent, false);
-            return new MyHolderHeader(viewHeader);
+        } else {
+            return new MyHolderHeader(viewItem);
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final int itemType = getItemViewType(position);
-        if(itemType == ITEM_TYPE){
+        if(itemType == ListRecyclerWraper.TYPE_ITEM){
             MyHolder myHolder = (MyHolder) holder;
-            myHolder.tvListAllCrimesItem.setText(allCrimeList.get(position).getCategory());
+            myHolder.tvListAllCrimesItem.setText(allCrimeList.get(position).getItemData().getCategory());
         }
         else{
             MyHolderHeader myHolder = (MyHolderHeader) holder;
-            char firstLetter = allCrimeList.toString().charAt(0);
-            myHolder.tvListAllCrimesHeader.setText(firstLetter);
+            myHolder.tvListAllCrimesHeader.setText(allCrimeList.get(position).getHeaderData());
         }
     }
 
@@ -69,37 +58,40 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
         return allCrimeList.size();
     }
 
-    public void setData(List<Crime> crimeList){
+    public void setData(List<ListRecyclerWraper> crimeList){
         if(crimeList != null && !crimeList.isEmpty()){
             this.allCrimeList.clear();
-            this.allCrimeList.addAll(allCrimeList);
+            this.allCrimeList.addAll(crimeList);
             notifyDataSetChanged();
         }
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder {
+     class MyHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_list_all_crimes_item)
         TextView tvListAllCrimesItem;
 
-        public MyHolder(View itemView) {
+         MyHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
     }
+
+    class MyHolderHeader extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.tv_all_crimes_header)
+        TextView tvListAllCrimesHeader;
+
+        MyHolderHeader(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
+    }
+
     public void setListener(RecyclerClickListener listener) {
         this.listener = listener;
     }
 }
 
-     class MyHolderHeader extends RecyclerView.ViewHolder {
 
-         @BindView(R.id.tv_all_crimes_header)
-         TextView tvListAllCrimesHeader;
-
-        public MyHolderHeader(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }

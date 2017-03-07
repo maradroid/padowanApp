@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements HomeListener {
     Button button1;
     @BindView(R.id.button3)
     Button buttonAllCrimes;
+    @BindView(R.id.button4)
+    Button buttonAllTeams;
     private boolean playerExe = false;
     private boolean crimeExe = false;
     private boolean teamExe = false;
@@ -72,11 +74,16 @@ public class MainActivity extends AppCompatActivity implements HomeListener {
 
     @OnClick(R.id.button3)
     public void OnAllCrimes(){
-        if(playerName != null && playerName.getText().length() != 0) {
-            Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
-            i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, "");
-            startActivity(i);
-        }
+        Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
+        i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, "");
+        startActivity(i);
+    }
+
+    @OnClick(R.id.button4)
+    public void OnAllTeams(){
+        Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
+        i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, "4");
+        startActivity(i);
     }
 
     @Override

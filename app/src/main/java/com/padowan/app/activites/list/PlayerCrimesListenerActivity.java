@@ -7,10 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.padowan.app.R;
+import com.padowan.app.activites.list.adapter.ListRecyclerWraper;
 import com.padowan.app.activites.list.adapter.RecyclerClickListener;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterCrimes;
+import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
 import com.padowan.app.model.data_model.Crime;
+import com.padowan.app.model.data_model.Team;
 
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
     //private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerViewAdapterCrimes crimesAdapter;
+    private RecyclerViewAdapterTeams teamsAdapter;
     private String name;
     private RecyclerViewPresenter recyclerViewPresenter;
 
@@ -39,36 +43,52 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
 
-        if (name != "") {
+        if (!name.equals("")) {
             mAdapter = new RecyclerViewAdapter();
             mAdapter.setListener(this);
             mRecyclerView.setAdapter(mAdapter);
-        }
-        else {
+        } else if (name.equals("")) {
             crimesAdapter = new RecyclerViewAdapterCrimes();
             crimesAdapter.setListener(this);
             mRecyclerView.setAdapter(crimesAdapter);
         }
+        else{
+            teamsAdapter = new RecyclerViewAdapterTeams();
+            teamsAdapter.setListener(this);
+            mRecyclerView.setAdapter(teamsAdapter);
+        }
 
         recyclerViewPresenter = new RecyclerViewPresenter();
-        //TODO: rijesi pozive, postaviti uvjete
-        recyclerViewPresenter.getPlayerCrimes(this, name);
-        recyclerViewPresenter.getAllCrimes(this);
+        if (!name.equals("")) {
+            recyclerViewPresenter.getPlayerCrimes(this, name);
+        } else{
+            recyclerViewPresenter.getAllCrimes(this);
+        }
 
     }
 
 
     @Override
-    public void onSuccess(List<Crime> crimeList) {
-        mAdapter.setData(crimeList);
-        //TODO: rijesi adaptere, oba moraju biti pozvana nekim uvjetima
+    public void onSuccessCrime(List<ListRecyclerWraper> crimeList) {
         if(crimesAdapter != null) {
             crimesAdapter.setData(crimeList);
         }
     }
 
     @Override
+    public void onSuccessPlayerCrime(List<Crime> crimeList) {
+        if(mAdapter != null) {
+            mAdapter.setData(crimeList);
+        }
+    }
+
+    @Override
     public void onFail(String error) {
+
+    }
+
+    @Override
+    public void onRecyclerClickTeam(Team team) {
 
     }
 

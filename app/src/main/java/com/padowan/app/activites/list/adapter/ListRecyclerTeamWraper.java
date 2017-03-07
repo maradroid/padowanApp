@@ -7,7 +7,7 @@ import com.padowan.app.model.data_model.Team;
  * Created by Korisnik on 7.3.2017..
  */
 
-class ListRecyclerTeamWraper {
+public class ListRecyclerTeamWraper {
     public static final int TYPE_YELLOW = R.layout.text_view_yellow_teams;
     public static final int TYPE_ORANGE = R.layout.text_view_orange_teams;
     public static final int TYPE_RED = R.layout.text_view_red_teams;
@@ -22,10 +22,10 @@ class ListRecyclerTeamWraper {
         this.type = type;
     }
 
-    public ListRecyclerTeamWraper(int arrestCount, int type) {
+/*    public ListRecyclerTeamWraper(int arrestCount, int type) {
         this.arrestCount = arrestCount;
         this.type = type;
-    }
+    }*/
 
     public int getArrestCount() {
         return arrestCount;
@@ -49,5 +49,9 @@ class ListRecyclerTeamWraper {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public Team getTamData() {
+        return teamData;
     }
 }

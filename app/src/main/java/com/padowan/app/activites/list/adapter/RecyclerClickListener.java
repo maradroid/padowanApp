@@ -8,6 +8,6 @@ import com.padowan.app.model.data_model.Team;
  */
 
 public interface RecyclerClickListener {
-    void onRecyclerClickTeam(Team team);
     void onRecyclerClick(Crime crime);
+    void onRecyclerClickTeam(Team team);
 }

@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements HomeListener {
 
     @Override
     public void onFailure(String error) {
-        Toast.makeText(MainActivity.this,
-                "Error!", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "Error!", Toast.LENGTH_LONG).show();
     }
 }

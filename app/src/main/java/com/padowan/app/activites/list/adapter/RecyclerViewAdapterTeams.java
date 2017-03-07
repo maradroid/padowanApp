@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.padowan.app.R;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Korisnik on 7.3.2017..
@@ -48,7 +50,7 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
         final int itemType = getItemViewType(position);
         if(itemType == ListRecyclerTeamWraper.TYPE_ORANGE){
             MyHolderOrange myHolderOrange = (MyHolderOrange) holder;
-            myHolderOrange.tvListOrangeTeams.setText(allTeams.get(position).getTeamData().getTeamName());
+            myHolderOrange.tvListOrangeTeams.setText(allTeams.get(position).getTamData().getTeamName());
 
         }else if(itemType == ListRecyclerTeamWraper.TYPE_YELLOW){
             MyHolderYellow myHolderYellow = (MyHolderYellow) holder;
@@ -65,8 +67,7 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
+    public int getItemCount() {return allTeams.size();
     }
 
     public void setData(List<ListRecyclerTeamWraper> teamList){
@@ -77,7 +78,7 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private class MyHolderOrange extends RecyclerView.ViewHolder {
+     class MyHolderOrange extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_list_orange_teams)
         TextView tvListOrangeTeams;
@@ -88,18 +89,27 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private class MyHolderYellow extends RecyclerView.ViewHolder {
+    class MyHolderYellow extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_list_yellow_teams)
         TextView tvListYellowTeams;
+
+        @BindView(R.id.ll_root)
+        LinearLayout llYellow;
 
         public MyHolderYellow(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+        @OnClick(R.id.ll_root)
+        void onClick(){
+            getAdapterPosition();
+            listener.onRecyclerClickTeam(allTeams.get(getAdapterPosition()).getTeamData());
+        }
     }
 
-    private class MyHolderRed extends RecyclerView.ViewHolder {
+     class MyHolderRed extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tv_list_red_teams)
         TextView tvListRedTeams;
@@ -110,9 +120,9 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-    private class MyHolderWhite extends RecyclerView.ViewHolder {
+     class MyHolderWhite extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.tv_all_crimes)
+        @BindView(R.id.tv_list_all_crimes_item)
         TextView tvListWhiteTeams;
 
         public MyHolderWhite(View itemView) {

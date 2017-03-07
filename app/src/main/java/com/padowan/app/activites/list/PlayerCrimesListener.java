@@ -1,5 +1,6 @@
 package com.padowan.app.activites.list;
 
+import com.padowan.app.activites.list.adapter.ListRecyclerTeamWraper;
 import com.padowan.app.activites.list.adapter.ListRecyclerWraper;
 import com.padowan.app.model.data_model.Crime;
 
@@ -10,6 +11,7 @@ import java.util.List;
  */
 public interface PlayerCrimesListener {
     void onSuccessCrime(List<ListRecyclerWraper> crimeList);
+    void onSuccessTeam(List<ListRecyclerTeamWraper> teamList);
     void onSuccessPlayerCrime(List<Crime> crimeList);
     void onFail(String error);
 }

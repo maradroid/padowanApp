@@ -35,6 +35,7 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
         View viewItem = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
         if(viewType == ListRecyclerWraper.TYPE_ITEM) {
             return new MyHolder(viewItem);
+
         } else {
             return new MyHolderHeader(viewItem);
         }
@@ -46,8 +47,8 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
         if(itemType == ListRecyclerWraper.TYPE_ITEM){
             MyHolder myHolder = (MyHolder) holder;
             myHolder.tvListAllCrimesItem.setText(allCrimeList.get(position).getItemData().getCategory());
-        }
-        else{
+
+        } else{
             MyHolderHeader myHolder = (MyHolderHeader) holder;
             myHolder.tvListAllCrimesHeader.setText(allCrimeList.get(position).getHeaderData());
         }

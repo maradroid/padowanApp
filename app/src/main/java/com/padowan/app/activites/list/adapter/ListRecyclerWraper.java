@@ -55,8 +55,4 @@ public class ListRecyclerWraper {
         this.itemData = itemData;
 
     }
-
-    public void setF(String s){
-        this.headerData = s;
-    }
 }

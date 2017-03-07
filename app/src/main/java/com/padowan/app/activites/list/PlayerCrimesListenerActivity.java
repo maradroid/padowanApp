@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
-
 import com.padowan.app.R;
+import com.padowan.app.activites.list.adapter.ListRecyclerTeamWraper;
 import com.padowan.app.activites.list.adapter.ListRecyclerWraper;
 import com.padowan.app.activites.list.adapter.RecyclerClickListener;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
@@ -16,7 +16,6 @@ import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Team;
 
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,35 +42,46 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
 
-        if (!name.equals("")) {
-            mAdapter = new RecyclerViewAdapter();
-            mAdapter.setListener(this);
-            mRecyclerView.setAdapter(mAdapter);
+        if (name.equals("4")) {
+            teamsAdapter = new RecyclerViewAdapterTeams();
+            teamsAdapter.setListener(this);
+            mRecyclerView.setAdapter(teamsAdapter);
+
         } else if (name.equals("")) {
             crimesAdapter = new RecyclerViewAdapterCrimes();
             crimesAdapter.setListener(this);
             mRecyclerView.setAdapter(crimesAdapter);
-        }
-        else{
-            teamsAdapter = new RecyclerViewAdapterTeams();
-            teamsAdapter.setListener(this);
-            mRecyclerView.setAdapter(teamsAdapter);
+
+        } else{
+            mAdapter = new RecyclerViewAdapter();
+            mAdapter.setListener(this);
+            mRecyclerView.setAdapter(mAdapter);
         }
 
         recyclerViewPresenter = new RecyclerViewPresenter();
-        if (!name.equals("")) {
-            recyclerViewPresenter.getPlayerCrimes(this, name);
-        } else{
+
+        if (name.equals("4")) {
+            recyclerViewPresenter.getAllTeams(this);
+
+        } else if(name.equals("")){
             recyclerViewPresenter.getAllCrimes(this);
+
+        } else{
+            recyclerViewPresenter.getPlayerCrimes(this, name);
         }
-
     }
-
 
     @Override
     public void onSuccessCrime(List<ListRecyclerWraper> crimeList) {
         if(crimesAdapter != null) {
             crimesAdapter.setData(crimeList);
+        }
+    }
+
+    @Override
+    public void onSuccessTeam(List<ListRecyclerTeamWraper> teamList) {
+        if(teamsAdapter != null){
+            teamsAdapter.setData(teamList);
         }
     }
 
@@ -84,17 +94,17 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
 
     @Override
     public void onFail(String error) {
-
-    }
-
-    @Override
-    public void onRecyclerClickTeam(Team team) {
-
+        Toast.makeText(this, "Error!", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onRecyclerClick(Crime crime) {
         Toast.makeText(this, "Arrest count: " + crime.getArrestCount(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRecyclerClickTeam(Team team) {
+        Toast.makeText(this, "Crimes: " + team.getArrestCount(), Toast.LENGTH_SHORT).show();
     }
 }
 

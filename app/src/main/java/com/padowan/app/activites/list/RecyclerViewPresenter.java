@@ -46,9 +46,8 @@ public class RecyclerViewPresenter {
         callAllPlayerCrimes.enqueue(new Callback<List<Crime>>() {
             @Override
             public void onResponse(Call<List<Crime>> call, Response<List<Crime>> response) {
-                List<Crime>  responseCrimeList = response.body();
 
-                Collections.sort(responseCrimeList, new Comparator<Crime>() {
+                Collections.sort(response.body(), new Comparator<Crime>() {
                     @Override
                     public int compare(Crime o1, Crime o2) {
                         return o1.getCategory().compareTo(o2.getCategory());
@@ -58,7 +57,7 @@ public class RecyclerViewPresenter {
                 List<ListRecyclerWraper> recyclerList = new ArrayList<ListRecyclerWraper>();
                 char firstLetter = '$';
 
-                for(Crime crime : responseCrimeList) {
+                for(Crime crime : response.body()) {
 
                     if (crime.getCategory().charAt(0) != firstLetter) {
                         firstLetter = crime.getCategory().charAt(0);

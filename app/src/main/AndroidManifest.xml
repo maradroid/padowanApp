@@ -17,12 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activites.list.PlayerCrimesListenerActivity"></activity>
+        <activity android:name=".activites.list.PlayerCrimesListenerActivity" />
+
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
+
+        <activity android:name=".activites.pager.PagerActivity" />
+        <activity android:name=".activites.pager.ViewPagerActivity"></activity>
     </application>
 
 </manifest>

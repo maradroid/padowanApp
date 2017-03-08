@@ -22,6 +22,7 @@ public interface WebAPIService {
     String TEAM = "team";
     String CRIME = "crime";
     String ALLCRIMES = "player/topCrimes/{name}";
+    String YEAR_ARREST ="player?start_date=2013-01-01&end_date=2013-12-31";
 
     @GET(PLAYER)
     Call<List<Player>> readPlayer();
@@ -34,5 +35,6 @@ public interface WebAPIService {
 
     @GET(ALLCRIMES)
     Call<List<Crime>> readAllCrimes(@Path("name") String name);
+
 
 }

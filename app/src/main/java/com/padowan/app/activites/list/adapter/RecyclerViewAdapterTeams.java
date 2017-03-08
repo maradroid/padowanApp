@@ -94,9 +94,6 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
         @BindView(R.id.tv_list_yellow_teams)
         TextView tvListYellowTeams;
 
-        @BindView(R.id.ll_root)
-        LinearLayout llYellow;
-
         public MyHolderYellow(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

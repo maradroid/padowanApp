@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_activity_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.padowan.app.activites.pager.PagerActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment_containter"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:layout_gravity="top">
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="end"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/button_add_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD A"
+            android:layout_above="@+id/button_add_b"
+            android:layout_alignStart="@+id/button_add_b" />
+
+        <Button
+            android:id="@+id/button_add_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ADD B"
+            android:layout_alignBaseline="@+id/button_replace_b"
+            android:layout_alignBottom="@+id/button_replace_b"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp" />
+
+        <Button
+            android:id="@+id/button_replace_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="replace A"
+            android:layout_above="@+id/button_replace_b"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/button_replace_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="replace b"
+            android:layout_below="@+id/button_remove_a"
+            android:layout_alignStart="@+id/button_replace_a" />
+
+        <Button
+            android:id="@+id/button_remove_a"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="remove a"
+            android:layout_above="@+id/button_remove_b"
+            android:layout_alignEnd="@+id/button_remove_b" />
+
+        <Button
+            android:id="@+id/button_remove_b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="remove b"
+            android:layout_marginBottom="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.padowan.app.R;
 import com.padowan.app.activites.list.PlayerCrimesListenerActivity;
+import com.padowan.app.activites.pager.PagerActivity;
+import com.padowan.app.activites.pager.ViewPagerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -83,6 +85,13 @@ public class MainActivity extends AppCompatActivity implements HomeListener {
     public void OnAllTeams(){
         Intent i = new Intent(this, PlayerCrimesListenerActivity.class);
         i.putExtra(PlayerCrimesListenerActivity.TAG_KEY, "4");
+        startActivity(i);
+    }
+
+    @OnClick(R.id.button_fragment)
+    public void onOpenFragment(){
+        Intent i = new Intent(this, ViewPagerActivity.class);
+        i.putExtra( ViewPagerActivity.TAG_KEY_PAGER2, "");
         startActivity(i);
     }
 

@@ -67,11 +67,26 @@
         android:text="@string/show_all_crime"
         android:layout_below="@+id/tv_crime" />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
     <Button
         android:id="@+id/button"
         style="@style/ButtonShape"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
         android:layout_alignParentBottom="true"
         android:text="@string/show_data" />
+
+    <Button
+        android:id="@+id/button_fragment"
+        style="@style/ButtonShape"
+        android:layout_width="fill_parent"
+        android:layout_weight="1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="Fragment" />
+</LinearLayout>
 
 </RelativeLayout>

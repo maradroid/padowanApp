@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.padowan.app.R;
@@ -15,6 +16,7 @@ import java.util.StringTokenizer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Korisnik on 6.3.2017..
@@ -72,7 +74,21 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
         @BindView(R.id.tv_list_all_crimes_item)
         TextView tvListAllCrimesItem;
 
-         MyHolder(View itemView) {
+         @BindView(R.id.vw_button)
+         View viewDelete;
+
+         @OnClick(R.id.vw_button)
+         void onClick(){
+             getAdapterPosition();
+
+             if(allCrimeList.get(getAdapterPosition()).getType() != allCrimeList.get(getAdapterPosition() + 1).getType()
+                     && allCrimeList.get(getAdapterPosition()).getType() != allCrimeList.get(getAdapterPosition() - 1).getType()){
+                 removeAt(getAdapterPosition() - 1);
+             }
+             removeAt(getAdapterPosition());
+         }
+
+    MyHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -93,6 +109,12 @@ public class RecyclerViewAdapterCrimes extends RecyclerView.Adapter<RecyclerView
     public void setListener(RecyclerClickListener listener) {
         this.listener = listener;
     }
+
+    private void removeAt(int position) {
+        allCrimeList.remove(position);
+        notifyItemRemoved(position);
+    }
+
 }
 
 

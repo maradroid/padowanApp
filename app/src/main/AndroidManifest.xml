@@ -26,7 +26,7 @@
         </intent-filter>
 
         <activity android:name=".activites.pager.PagerActivity" />
-        <activity android:name=".activites.pager.ViewPagerActivity"></activity>
+        <activity android:name=".activites.pager.activity.ViewPagerActivity"></activity>
     </application>
 
 </manifest>

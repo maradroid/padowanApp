@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.padowan.app.R;
 import com.padowan.app.model.data_model.Crime;
+import com.padowan.app.model.data_model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import butterknife.ButterKnife;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyHolder> {
 
     private List<Crime> crimeList = new ArrayList<>();
+
     private RecyclerClickListener listener;
 
     @Override
@@ -50,7 +52,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         @BindView(R.id.tv_all_crimes)
         TextView tvAllCrimes;

@@ -8,8 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.padowan.app.R;
 import com.padowan.app.activites.list.PlayerCrimesListenerActivity;
-import com.padowan.app.activites.pager.PagerActivity;
-import com.padowan.app.activites.pager.ViewPagerActivity;
+import com.padowan.app.activites.pager.activity.ViewPagerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

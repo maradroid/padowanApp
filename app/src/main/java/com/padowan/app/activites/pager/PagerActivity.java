@@ -1,12 +1,11 @@
 package com.padowan.app.activites.pager;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.padowan.app.R;
+import com.padowan.app.activites.pager.fragment.FragmentA;
+import com.padowan.app.activites.pager.fragment.FragmentB;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

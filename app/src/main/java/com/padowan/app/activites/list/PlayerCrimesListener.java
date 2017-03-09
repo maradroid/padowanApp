@@ -3,6 +3,7 @@ package com.padowan.app.activites.list;
 import com.padowan.app.activites.list.adapter.ListRecyclerTeamWraper;
 import com.padowan.app.activites.list.adapter.ListRecyclerWraper;
 import com.padowan.app.model.data_model.Crime;
+import com.padowan.app.model.data_model.Player;
 
 import java.util.List;
 

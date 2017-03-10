@@ -31,20 +31,19 @@ public class PagerPresenter {
         return urlMap;
     }
 
-    public void getAllYearCrimes(final PlayerYearListener listener, String startDate, String endDate){
+    public void getAllYearCrimes(final PlayerYearListener listener, String startDate, String endDate, final int tag){
         callAllYearCrimes = RetroUtil.getService().readPlayerYearCrimes(getUrl(startDate, endDate));
         callAllYearCrimes.enqueue(new Callback<List<Player>>() {
             @Override
             public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
 
-                /*List<String> nameList = new ArrayList<String>();
+                List<String> nameList = new ArrayList<String>();
                 String name = "";
                 for(Player player : response.body()){
                     name += player.getName();
-                nameList.add(name);}*/
+                nameList.add(name);}
 
-                listener.onSuccessPlayerYearCrime(response.body());
-                //listener.onSuccessPlayeYearName(nameList);
+                listener.onSuccessPlayerYearCrime(response.body(), tag);
             }
 
             @Override

@@ -1,6 +1,7 @@
 package com.padowan.app.activites.list.adapter;
 
 import com.padowan.app.model.data_model.Crime;
+import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
 
 /**
@@ -10,4 +11,5 @@ import com.padowan.app.model.data_model.Team;
 public interface RecyclerClickListener {
     void onRecyclerClick(Crime crime);
     void onRecyclerClickTeam(Team team);
+    void onRecyclerClickPlayer(Player player);
 }

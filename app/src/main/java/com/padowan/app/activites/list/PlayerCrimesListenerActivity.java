@@ -13,8 +13,8 @@ import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterCrimes;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
 import com.padowan.app.model.data_model.Crime;
+import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
-
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +25,6 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
-    //private RecyclerView mRecyclerView;
     private RecyclerViewAdapter mAdapter;
     private RecyclerViewAdapterCrimes crimesAdapter;
     private RecyclerViewAdapterTeams teamsAdapter;
@@ -105,6 +104,11 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
     @Override
     public void onRecyclerClickTeam(Team team) {
         Toast.makeText(this, "Crimes: " + team.getArrestCount(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRecyclerClickPlayer(Player player) {
+
     }
 }
 

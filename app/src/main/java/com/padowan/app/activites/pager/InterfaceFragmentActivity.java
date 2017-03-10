@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface InterfaceFragmentActivity {
     void sendData(List<String> playerList);
-    void sendNameToActivity(String startYear, String endYear);
+    void sendNameToActivity(String startYear, String endYear, int tag);
 }

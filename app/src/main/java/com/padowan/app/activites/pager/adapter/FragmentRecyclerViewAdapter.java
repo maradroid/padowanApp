@@ -5,14 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.padowan.app.R;
-import com.padowan.app.activites.list.adapter.RecyclerClickListener;
 import com.padowan.app.model.data_model.Player;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,13 +18,12 @@ import butterknife.ButterKnife;
 
 public class FragmentRecyclerViewAdapter extends RecyclerView.Adapter<FragmentRecyclerViewAdapter.MyHolderPlayer> {
 
-    //private List<String> playerList = new ArrayList<>();
     private List<Player> playerList = new ArrayList<>();
 
     @Override
     public FragmentRecyclerViewAdapter.MyHolderPlayer onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.first_fragment, parent, false);
+                .inflate(R.layout.year_crimes_holder, parent, false);
 
         return new FragmentRecyclerViewAdapter.MyHolderPlayer(view);
     }
@@ -43,14 +38,6 @@ public class FragmentRecyclerViewAdapter extends RecyclerView.Adapter<FragmentRe
         return playerList.size();
     }
 
-    /*public void setPlayerData(List<String> playerList){
-        if(playerList != null && !playerList.isEmpty()){
-            this.playerList.clear();
-            this.playerList.addAll(playerList);
-            notifyDataSetChanged();
-        }
-    }*/
-
     public void setPlayerData(List<Player> playerList){
         if(playerList != null && !playerList.isEmpty()){
             this.playerList.clear();
@@ -59,7 +46,7 @@ public class FragmentRecyclerViewAdapter extends RecyclerView.Adapter<FragmentRe
         }
     }
 
-    public static class MyHolderPlayer extends RecyclerView.ViewHolder{
+     class MyHolderPlayer extends RecyclerView.ViewHolder{
 
         @BindView(R.id.tv_fragment1)
         TextView tvAllPlayers;
@@ -68,7 +55,7 @@ public class FragmentRecyclerViewAdapter extends RecyclerView.Adapter<FragmentRe
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
-    }
 
+    }
 }
 

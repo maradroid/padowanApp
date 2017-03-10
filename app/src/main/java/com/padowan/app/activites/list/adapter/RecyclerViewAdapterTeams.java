@@ -4,14 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.padowan.app.R;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -79,7 +75,6 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
     }
 
      class MyHolderOrange extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_list_orange_teams)
         TextView tvListOrangeTeams;
 
@@ -90,7 +85,6 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
     }
 
     class MyHolderYellow extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_list_yellow_teams)
         TextView tvListYellowTeams;
 
@@ -107,7 +101,6 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
     }
 
      class MyHolderRed extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_list_red_teams)
         TextView tvListRedTeams;
 
@@ -118,7 +111,6 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
     }
 
      class MyHolderWhite extends RecyclerView.ViewHolder {
-
         @BindView(R.id.tv_list_all_crimes_item)
         TextView tvListWhiteTeams;
 

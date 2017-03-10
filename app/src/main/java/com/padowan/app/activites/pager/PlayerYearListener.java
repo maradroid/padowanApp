@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 public interface PlayerYearListener {
-    void onSuccessPlayerYearCrime(List<Player> playerYearList);
+    void onSuccessPlayerYearCrime(List<Player> playerYearList, int tag);
     void onFailure(String error);
-    void onSuccessPlayeYearName(List<String> names);
+    void onSuccessPlayeYearName(List<String> names, int tag);
 }

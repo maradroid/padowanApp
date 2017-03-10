@@ -77,7 +77,6 @@ public class FirstFragment extends Fragment implements RecyclerClickListener{
         unbinder = ButterKnife.bind(this, view);
 
         playerAdapter = new FragmentRecyclerViewAdapter();
-        playerAdapter.setListener(this);
         recyclerViewPlayers.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewPlayers.setAdapter(playerAdapter);
 

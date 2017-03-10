@@ -82,6 +82,12 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+         @OnClick(R.id.orange_root)
+         void onClick(){
+             getAdapterPosition();
+             listener.onRecyclerClickTeam(allTeams.get(getAdapterPosition()).getTeamData());
+         }
     }
 
     class MyHolderYellow extends RecyclerView.ViewHolder {
@@ -108,6 +114,12 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+         @OnClick(R.id.red_root)
+         void onClick(){
+             getAdapterPosition();
+             listener.onRecyclerClickTeam(allTeams.get(getAdapterPosition()).getTeamData());
+         }
     }
 
      class MyHolderWhite extends RecyclerView.ViewHolder {
@@ -118,6 +130,12 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
+         @OnClick(R.id.white_root)
+         void onClick(){
+             getAdapterPosition();
+             listener.onRecyclerClickTeam(allTeams.get(getAdapterPosition()).getTeamData());
+         }
     }
 
     public void setListener(RecyclerClickListener listener) {

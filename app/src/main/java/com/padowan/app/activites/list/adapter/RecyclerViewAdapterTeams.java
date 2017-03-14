@@ -1,9 +1,11 @@
 package com.padowan.app.activites.list.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.padowan.app.R;
 import java.util.ArrayList;
@@ -106,17 +108,17 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
-     class MyHolderRed extends RecyclerView.ViewHolder {
+    public class MyHolderRed extends RecyclerView.ViewHolder {
         @BindView(R.id.tv_list_red_teams)
         TextView tvListRedTeams;
 
-        public MyHolderRed(View itemView) {
+         public MyHolderRed(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
          @OnClick(R.id.red_root)
-         void onClick(){
+        public void onClick(){
              getAdapterPosition();
              listener.onRecyclerClickTeam(allTeams.get(getAdapterPosition()).getTeamData());
          }
@@ -135,6 +137,7 @@ public class RecyclerViewAdapterTeams extends RecyclerView.Adapter<RecyclerView.
          void onClick(){
              getAdapterPosition();
              listener.onRecyclerClickTeam(allTeams.get(getAdapterPosition()).getTeamData());
+
          }
     }
 

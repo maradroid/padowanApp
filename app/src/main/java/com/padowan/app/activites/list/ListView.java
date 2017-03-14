@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * Created by Korisnik on 6.3.2017..
  */
-public interface PlayerCrimesListener {
-    void onSuccessCrime(List<ListRecyclerWraper> crimeList);
-    void onSuccessTeam(List<ListRecyclerTeamWraper> teamList);
-    void onSuccessPlayerCrime(List<Crime> crimeList);
-    void onFail(String error);
+public interface ListView {
+    void onAllCrimes(List<ListRecyclerWraper> crimeList);
+    void onTeamCrimes(List<ListRecyclerTeamWraper> teamList);
+    void onPlayerCrimes(List<Crime> crimeList);
+    void showErrorMessage(String error);
 }

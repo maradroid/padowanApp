@@ -12,6 +12,7 @@ import com.padowan.app.activites.list.adapter.RecyclerClickListener;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterCrimes;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
+import com.padowan.app.activites.list.presenter.ListPresenterImpl;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
@@ -19,7 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PlayerCrimesListenerActivity extends AppCompatActivity implements PlayerCrimesListener, RecyclerClickListener {
+public class ListActivity extends AppCompatActivity implements ListView, RecyclerClickListener {
 
     public static  final String TAG_KEY = "key1";
 
@@ -29,7 +30,7 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
     private RecyclerViewAdapterCrimes crimesAdapter;
     private RecyclerViewAdapterTeams teamsAdapter;
     private String name;
-    private RecyclerViewPresenter recyclerViewPresenter;
+    private ListPresenterImpl listPresenterImpl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +58,16 @@ public class PlayerCrimesListenerActivity extends AppCompatActivity implements P
             mRecyclerView.setAdapter(mAdapter);
         }
 
-        recyclerViewPresenter = new RecyclerViewPresenter();
+        listPresenterImpl = new ListPresenterImpl();
 
         if (name.equals("4")) {
-            recyclerViewPresenter.getAllTeams(this);
+            listPresenterImpl.getAllTeams(this);
 
         } else if(name.equals("")){
-            recyclerViewPresenter.getAllCrimes(this);
+            listPresenterImpl.getAllCrimes(this);
 
         } else{
-            recyclerViewPresenter.getPlayerCrimes(this, name);
+            listPresenterImpl.getPlayerCrimes(this, name);
         }
     }
 

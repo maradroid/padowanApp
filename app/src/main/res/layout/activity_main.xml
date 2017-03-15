@@ -21,7 +21,7 @@
         android:layout_below="@+id/tv_label_player" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_all_player_crimes"
         style="@style/ButtonShapeSmall"
         android:text="@string/show_player_crime"
         android:background="@drawable/button_shape"
@@ -31,11 +31,11 @@
         android:id="@+id/tv_label_team"
         style="@style/LabelText"
         android:text="@string/wurst_club"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/btn_all_player_crimes"
         />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btn_show_all_teams"
         style="@style/ButtonShapeSmall"
         android:background="@drawable/button_shape"
         android:text="@string/all_teams"
@@ -51,7 +51,7 @@
         android:id="@+id/tv_label_crime"
         style="@style/LabelText"
         android:text="@string/crime"
-        android:layout_below="@+id/button4"
+        android:layout_below="@+id/btn_show_all_teams"
         />
 
     <TextView
@@ -61,7 +61,7 @@
         android:layout_below="@+id/tv_label_crime" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_show_all_crimes"
         style="@style/ButtonShapeSmall"
         android:background="@drawable/button_shape"
         android:text="@string/show_all_crime"
@@ -72,7 +72,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true">
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_show_data"
         style="@style/ButtonShape"
         android:layout_width="fill_parent"
         android:layout_weight="1"

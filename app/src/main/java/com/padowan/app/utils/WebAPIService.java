@@ -1,6 +1,4 @@
-package com.padowan.app.model.utils;
-
-import android.support.test.espresso.core.deps.dagger.MapKey;
+package com.padowan.app.utils;
 
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
@@ -10,10 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
 /**

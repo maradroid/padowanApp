@@ -7,19 +7,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.padowan.app.R;
+import com.padowan.app.activites.home.presenter.HomePresenter;
 import com.padowan.app.activites.home.presenter.HomePresenterImpl;
 import com.padowan.app.activites.list.ListActivity;
-import com.padowan.app.activites.pager.activity.ViewPagerActivity;
+import com.padowan.app.activites.pager.activity.PagerActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.padowan.app.R.id.tv_player;
+import static com.padowan.app.activites.list.presenter.ListPresenterImpl.ALL_CRIMES_CONST;
+import static com.padowan.app.activites.list.presenter.ListPresenterImpl.ALL_TEAMS_CONST;
 
 public class HomeActivity extends AppCompatActivity implements HomeView {
-
-    private static final String TAG = "HomeActivity";
 
     @BindView(tv_player)
     TextView playerName;
@@ -32,28 +33,28 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     private boolean crimeExe = false;
     private boolean teamExe = false;
 
-    private HomePresenterImpl homePresenterImpl;
+    private HomePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        homePresenterImpl = new HomePresenterImpl(this);
+        presenter = new HomePresenterImpl(this);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        homePresenterImpl.stopCall();
+        presenter.stopCall();
     }
 
-    @OnClick(R.id.button)
+    @OnClick(R.id.btn_show_data)
     public void onClick(){
         if (!playerExe && !crimeExe && !teamExe) {
-            homePresenterImpl.topCrime();
-            homePresenterImpl.worstPlayer();
-            homePresenterImpl.worstTeam();
+            presenter.topCrime();
+            presenter.worstPlayer();
+            presenter.worstTeam();
             playerExe = true;
             crimeExe = true;
             teamExe = true;
@@ -64,33 +65,33 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
     }
 
-    @OnClick(R.id.button2)
+    @OnClick(R.id.btn_all_player_crimes)
     public void OnPlayerCrimes(){
         if(playerName != null && playerName.getText().length() != 0) {
             Intent i = new Intent(this, ListActivity.class);
-            i.putExtra(ListActivity.TAG_KEY, playerName.getText().toString());
+            i.putExtra(ListActivity.EXTRA_TO_LIST, playerName.getText().toString());
             startActivity(i);
         }
     }
 
-    @OnClick(R.id.button3)
+    @OnClick(R.id.btn_show_all_crimes)
     public void OnAllCrimes(){
         Intent i = new Intent(this, ListActivity.class);
-        i.putExtra(ListActivity.TAG_KEY, "");
+        i.putExtra(ListActivity.EXTRA_TO_LIST, ALL_CRIMES_CONST);
         startActivity(i);
     }
 
-    @OnClick(R.id.button4)
+    @OnClick(R.id.btn_show_all_teams)
     public void OnAllTeams(){
         Intent i = new Intent(this, ListActivity.class);
-        i.putExtra(ListActivity.TAG_KEY, "4");
+        i.putExtra(ListActivity.EXTRA_TO_LIST, ALL_TEAMS_CONST);
         startActivity(i);
     }
 
     @OnClick(R.id.button_fragment)
     public void onOpenFragment(){
-        Intent i = new Intent(this, ViewPagerActivity.class);
-        i.putExtra( ViewPagerActivity.TAG_KEY_PAGER2, "");
+        Intent i = new Intent(this, PagerActivity.class);
+        i.putExtra( PagerActivity.EXTRA_TO_PAGER, ALL_CRIMES_CONST);
         startActivity(i);
     }
 

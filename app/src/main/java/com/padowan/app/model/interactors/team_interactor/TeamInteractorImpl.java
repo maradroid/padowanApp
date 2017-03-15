@@ -2,7 +2,7 @@ package com.padowan.app.model.interactors.team_interactor;
 
 import com.padowan.app.model.data_model.Team;
 import com.padowan.app.model.interactors.team_interactor.listener.TeamListener;
-import com.padowan.app.model.utils.RetroUtil;
+import com.padowan.app.utils.RetroUtil;
 
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class TeamInteractorImpl implements TeamInteractor {
 
     @Override
     public void stop() {
-        callTeam.cancel();
+        if (callTeam != null && callTeam.isExecuted())
+            callTeam.cancel();
     }
 }

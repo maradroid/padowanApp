@@ -5,5 +5,5 @@ package com.padowan.app.base;
  */
 
 public interface BaseInteractor {
-    void onDataFailure(String error);
+    void stop();
 }

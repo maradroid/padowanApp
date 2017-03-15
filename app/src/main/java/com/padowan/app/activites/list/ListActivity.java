@@ -12,9 +12,9 @@ import com.padowan.app.activites.list.adapter.RecyclerClickListener;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterCrimes;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
+import com.padowan.app.activites.list.presenter.ListPresenter;
 import com.padowan.app.activites.list.presenter.ListPresenterImpl;
 import com.padowan.app.model.data_model.Crime;
-import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
 import java.util.List;
 import butterknife.BindView;
@@ -22,79 +22,57 @@ import butterknife.ButterKnife;
 
 public class ListActivity extends AppCompatActivity implements ListView, RecyclerClickListener {
 
-    public static  final String TAG_KEY = "key1";
+    public static  final String EXTRA_TO_LIST = "list";
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
-    private RecyclerViewAdapter mAdapter;
+    private RecyclerViewAdapter playerAdapter;
     private RecyclerViewAdapterCrimes crimesAdapter;
     private RecyclerViewAdapterTeams teamsAdapter;
-    private String name;
-    private ListPresenterImpl listPresenterImpl;
+    private ListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_crimes);
         ButterKnife.bind(this);
-        name = getIntent().getStringExtra(TAG_KEY);
-
+        presenter = new ListPresenterImpl(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
-
-        if (name.equals("4")) {
-            teamsAdapter = new RecyclerViewAdapterTeams();
-            teamsAdapter.setListener(this);
-            mRecyclerView.setAdapter(teamsAdapter);
-
-        } else if (name.equals("")) {
-            crimesAdapter = new RecyclerViewAdapterCrimes();
-            crimesAdapter.setListener(this);
-            mRecyclerView.setAdapter(crimesAdapter);
-
-        } else{
-            mAdapter = new RecyclerViewAdapter();
-            mAdapter.setListener(this);
-            mRecyclerView.setAdapter(mAdapter);
-        }
-
-        listPresenterImpl = new ListPresenterImpl();
-
-        if (name.equals("4")) {
-            listPresenterImpl.getAllTeams(this);
-
-        } else if(name.equals("")){
-            listPresenterImpl.getAllCrimes(this);
-
-        } else{
-            listPresenterImpl.getPlayerCrimes(this, name);
-        }
     }
 
     @Override
-    public void onSuccessCrime(List<ListRecyclerWraper> crimeList) {
-        if(crimesAdapter != null) {
-            crimesAdapter.setData(crimeList);
-        }
+    protected void onStart() {
+        super.onStart();
+        String name = getIntent().getStringExtra(EXTRA_TO_LIST);
+        presenter.initialize(name);
     }
 
     @Override
-    public void onSuccessTeam(List<ListRecyclerTeamWraper> teamList) {
-        if(teamsAdapter != null){
-            teamsAdapter.setData(teamList);
-        }
+    public void chooseCrimesAdapter() {
+        crimesAdapter = new RecyclerViewAdapterCrimes();
+        crimesAdapter.setListener(this);
+        mRecyclerView.setAdapter(crimesAdapter);
     }
 
     @Override
-    public void onSuccessPlayerCrime(List<Crime> crimeList) {
-        if(mAdapter != null) {
-            mAdapter.setData(crimeList);
-        }
+    public void chooseTemasAdapter() {
+        teamsAdapter = new RecyclerViewAdapterTeams();
+        teamsAdapter.setListener(this);
+        mRecyclerView.setAdapter(teamsAdapter);
     }
 
     @Override
-    public void onFail(String error) {
-        Toast.makeText(this, "Error!", Toast.LENGTH_LONG).show();
+    public void choosePlayerCriemsAdapter() {
+        playerAdapter = new RecyclerViewAdapter();
+        playerAdapter.setListener(this);
+        mRecyclerView.setAdapter(playerAdapter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.stopCall();
     }
 
     @Override
@@ -108,8 +86,30 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
     }
 
     @Override
-    public void onRecyclerClickPlayer(Player player) {
+    public void onAllCrimes(List<ListRecyclerWraper> crimeList) {
+        if(crimesAdapter != null) {
+            crimesAdapter.setData(crimeList);
+        }
+    }
 
+    @Override
+    public void onTeamCrimes(List<ListRecyclerTeamWraper> teamList) {
+        if(teamsAdapter != null){
+            teamsAdapter.setData(teamList);
+        }
+    }
+
+    @Override
+    public void onPlayerCrimes(List<Crime> crimesList) {
+        if(playerAdapter != null) {
+            playerAdapter.setData(crimesList);
+        }
+    }
+
+    @Override
+    public void showErrorMessage(String error) {
+        Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
     }
 }
+
 

@@ -2,7 +2,7 @@ package com.padowan.app.model.interactors.crime_interactor;
 
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.interactors.crime_interactor.listener.CrimeListener;
-import com.padowan.app.model.utils.RetroUtil;
+import com.padowan.app.utils.RetroUtil;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import retrofit2.Response;
 public class CrimeInteractorImpl implements CrimeInteractor {
 
     private Call<List<Crime>> callCrime;
+    private Call<List<Crime>> callAllCrimes;
 
     @Override
     public void getCrimes(final CrimeListener listenerCrime) {
@@ -35,12 +36,12 @@ public class CrimeInteractorImpl implements CrimeInteractor {
     }
 
     @Override
-    public void getAllCrimes(final CrimeListener crimeListener) {
-        callCrime = RetroUtil.getService().readAllCrimes(name);   /**pošalji name iz aktivnosti*/
-        callCrime.enqueue(new Callback<List<Crime>>(){
+    public void getAllCrimes(final CrimeListener crimeListener, String name) {
+        callAllCrimes = RetroUtil.getService().readAllCrimes(name);   /**pošalji name iz aktivnosti*/
+        callAllCrimes.enqueue(new Callback<List<Crime>>(){
             @Override
             public void onResponse(Call<List<Crime>> call, Response<List<Crime>> response){
-                crimeListener.onCrimeSuccess(response.body());
+                crimeListener.onAllPlayerCrimeSuccess(response.body());
             }
 
             @Override
@@ -52,7 +53,10 @@ public class CrimeInteractorImpl implements CrimeInteractor {
 
     @Override
     public void stop() {
-        callCrime.cancel();
+        if (callCrime != null)
+            callCrime.cancel();
+        if(callAllCrimes != null)
+            callAllCrimes.cancel();
     }
 }
 

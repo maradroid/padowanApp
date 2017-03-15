@@ -1,20 +1,13 @@
 package com.padowan.app.activites.pager.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.padowan.app.R;
-import com.padowan.app.model.utils.RetroUtil;
-import com.padowan.app.model.utils.WebAPIService;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Korisnik on 8.3.2017..

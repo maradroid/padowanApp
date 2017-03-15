@@ -6,13 +6,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.widget.Toast;
+
 import com.padowan.app.R;
-import com.padowan.app.activites.pager.InterfaceFragmentActivity;
-import com.padowan.app.activites.pager.PlayerYearListener;
+import com.padowan.app.activites.pager.YearsDelegate;
 import com.padowan.app.activites.pager.adapter.ViewPagerAdapter;
 import com.padowan.app.activites.pager.fragment.FirstFragment;
+import com.padowan.app.activites.pager.presenter.PagerPresenterImpl;
 import com.padowan.app.model.data_model.Player;
 
 import java.util.List;
@@ -21,9 +21,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class ViewPagerActivity extends AppCompatActivity implements PlayerYearListener, InterfaceFragmentActivity {
+public class PagerActivity extends AppCompatActivity implements PagerView, YearsDelegate {
 
-    public static  final String TAG_KEY_PAGER2 = "key2";
+    public static  final String EXTRA_TO_PAGER = "pager";
 
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
@@ -32,7 +32,7 @@ public class ViewPagerActivity extends AppCompatActivity implements PlayerYearLi
 
     private List<Fragment> fragmentList ;
     private ViewPagerAdapter viewPagerAdapter;
-    private PagerPresenter pagerPresenter;
+    private PagerPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,46 +44,36 @@ public class ViewPagerActivity extends AppCompatActivity implements PlayerYearLi
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        pagerPresenter = new PagerPresenter();
+        presenter = new PagerPresenterImpl(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_view_pager, menu);
-        return true;
+    protected void onStop() {
+        super.onStop();
+        presenter.stopCall();
     }
 
     @Override
-    public void onSuccessPlayerYearCrime(List<Player> playerYearList, int tag) {
+    public void getDateAndTag(String startYear, String endYear, int tag) {
+        presenter.allYearCrimes(startYear, endYear, tag);
+    }
+
+    @Override
+    public void onYearlyPlayerCrime(List<Player> playerYearCrime, int page) {
         fragmentList = getSupportFragmentManager().getFragments();
 
         for (Fragment fragment : fragmentList) {
             FirstFragment firstFragment =  (FirstFragment) fragment;
 
-            if (tag == firstFragment.getPage()) {
-                firstFragment.setAdapterData(playerYearList);
+            if (page == firstFragment.getPage()) {
+                firstFragment.setAdapterData(playerYearCrime);
                 break;
             }
         }
     }
-    @Override
-    public void sendNameToActivity(String startYear, String endYear, int tag) {
-        pagerPresenter.getAllYearCrimes(this, startYear, endYear, tag);
-    }
 
     @Override
-    public void onFailure(String error) {
-
-    }
-
-    @Override
-    public void onSuccessPlayeYearName(List<String> names, int tag) {
-
-    }
-
-    @Override
-    public void sendData(List<String> playerList) {
-
+    public void showErrorMessage(String error) {
+        Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
     }
 }

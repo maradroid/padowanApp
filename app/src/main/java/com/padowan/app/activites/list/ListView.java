@@ -14,5 +14,8 @@ public interface ListView {
     void onAllCrimes(List<ListRecyclerWraper> crimeList);
     void onTeamCrimes(List<ListRecyclerTeamWraper> teamList);
     void onPlayerCrimes(List<Crime> crimeList);
+    void chooseCrimesAdapter();
+    void chooseTemasAdapter();
+    void choosePlayerCriemsAdapter();
     void showErrorMessage(String error);
 }

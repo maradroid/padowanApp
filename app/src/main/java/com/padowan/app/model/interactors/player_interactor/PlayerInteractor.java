@@ -1,6 +1,7 @@
 package com.padowan.app.model.interactors.player_interactor;
 
 import com.padowan.app.base.BaseInteractor;
+import com.padowan.app.model.interactors.player_interactor.listener.BasePlayerListener;
 import com.padowan.app.model.interactors.player_interactor.listener.PlayerListener;
 
 import java.util.Map;
@@ -11,6 +12,6 @@ import java.util.Map;
  */
 
 public interface PlayerInteractor extends BaseInteractor{
-    void getPlayers(final PlayerListener listenerPlayer);
+    void getPlayers(final BasePlayerListener listenerPlayer);
     void getAllPlayerCrimes(PlayerListener playerListener, Map<String, String> date);
 }

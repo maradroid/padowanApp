@@ -1,6 +1,7 @@
 package com.padowan.app.model.interactors.player_interactor;
 
 import com.padowan.app.model.data_model.Player;
+import com.padowan.app.model.interactors.player_interactor.listener.BasePlayerListener;
 import com.padowan.app.model.interactors.player_interactor.listener.PlayerListener;
 import com.padowan.app.utils.RetroUtil;
 
@@ -21,7 +22,7 @@ public class PlayerInteractorImpl implements PlayerInteractor {
     private Call<List<Player>> callPlayerCrimes;
 
     @Override
-    public void getPlayers(final PlayerListener listenerPlayer) {
+    public void getPlayers(final BasePlayerListener listenerPlayer) {
         callPlayer = RetroUtil.getService().readPlayer();
         callPlayer.enqueue(new Callback<List<Player>>() {
             @Override

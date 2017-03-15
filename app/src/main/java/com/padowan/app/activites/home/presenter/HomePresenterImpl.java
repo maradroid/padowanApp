@@ -4,12 +4,12 @@ import com.padowan.app.activites.home.HomeView;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
+import com.padowan.app.model.interactors.crime_interactor.listener.BaseCrimeListener;
 import com.padowan.app.model.interactors.player_interactor.PlayerInteractor;
 import com.padowan.app.model.interactors.player_interactor.PlayerInteractorImpl;
 import com.padowan.app.model.interactors.crime_interactor.CrimeInteractor;
 import com.padowan.app.model.interactors.crime_interactor.CrimeInteractorImpl;
-import com.padowan.app.model.interactors.crime_interactor.listener.CrimeListener;
-import com.padowan.app.model.interactors.player_interactor.listener.PlayerListener;
+import com.padowan.app.model.interactors.player_interactor.listener.BasePlayerListener;
 import com.padowan.app.model.interactors.team_interactor.listener.TeamListener;
 import com.padowan.app.model.interactors.team_interactor.TeamInteractor;
 import com.padowan.app.model.interactors.team_interactor.TeamInteractorImpl;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by Mario Bat on 1.3.2017..
  */
-public class HomePresenterImpl implements HomePresenter, PlayerListener, TeamListener, CrimeListener {
+public class HomePresenterImpl implements HomePresenter, BasePlayerListener, TeamListener, BaseCrimeListener {
 
     private HomeView homeView;
     private TeamInteractor teamInteractor;
@@ -78,11 +78,6 @@ public class HomePresenterImpl implements HomePresenter, PlayerListener, TeamLis
     }
 
     @Override
-    public void onYearPlayerCrime(List<Player> players) {
-        return ;
-    }
-
-    @Override
     public void onTeamSuccess(List<Team> team) {
         if (team != null && !team.isEmpty()) {
             Team worstTeam = team.get(0);
@@ -106,10 +101,5 @@ public class HomePresenterImpl implements HomePresenter, PlayerListener, TeamLis
             }
             homeView.onCrime(topCrimes.getCategory());
         }
-    }
-
-    @Override
-    public void onAllPlayerCrimeSuccess(List<Crime> crimes) {
-        return;
     }
 }

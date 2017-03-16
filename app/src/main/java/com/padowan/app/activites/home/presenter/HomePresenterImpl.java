@@ -26,6 +26,9 @@ public class HomePresenterImpl implements HomePresenter, BasePlayerListener, Tea
     private TeamInteractor teamInteractor;
     private CrimeInteractor crimeInteractor;
     private PlayerInteractor playerInteractor;
+    private Boolean playerExe = false;
+    private Boolean crimeExe = false;
+    private Boolean teamExe = false;
 
     public HomePresenterImpl(HomeView homeView) {
         this.homeView = homeView;
@@ -60,6 +63,15 @@ public class HomePresenterImpl implements HomePresenter, BasePlayerListener, Tea
     }
 
     @Override
+    public void onClickCall() {
+        if (!playerExe && !crimeExe && !teamExe){
+            topCrime();
+            worstPlayer();
+            worstTeam();
+        }
+    }
+
+    @Override
     public void onDataFailure(String error) {
       homeView.showErrorMessage(error);
     }
@@ -74,6 +86,7 @@ public class HomePresenterImpl implements HomePresenter, BasePlayerListener, Tea
                 }
             }
             homeView.onPlayer(worstPlayer.getName());
+            playerExe = false;
         }
     }
 
@@ -87,6 +100,7 @@ public class HomePresenterImpl implements HomePresenter, BasePlayerListener, Tea
                 }
             }
             homeView.onTeam(worstTeam.getTeamName());
+            teamExe = false;
         }
     }
 
@@ -100,6 +114,7 @@ public class HomePresenterImpl implements HomePresenter, BasePlayerListener, Tea
                 }
             }
             homeView.onCrime(topCrimes.getCategory());
+            crimeExe = false;
         }
     }
 }

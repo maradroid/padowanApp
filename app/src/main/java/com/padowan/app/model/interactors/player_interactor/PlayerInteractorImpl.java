@@ -38,12 +38,12 @@ public class PlayerInteractorImpl implements PlayerInteractor {
     }
 
     @Override
-    public void getAllPlayerCrimes(final PlayerListener playerListener, Map<String, String> date) {
+    public void getAllPlayerCrimes(final PlayerListener playerListener, Map<String, String> date, final int page) {
         callPlayerCrimes = RetroUtil.getService().readPlayerYearCrimes(date);
         callPlayerCrimes.enqueue(new Callback<List<Player>>() {
             @Override
             public void onResponse(Call<List<Player>> call, Response<List<Player>> response) {
-                playerListener.onYearPlayerCrime(response.body());
+                playerListener.onYearPlayerCrime(response.body(), page);
             }
 
             @Override

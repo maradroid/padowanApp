@@ -25,7 +25,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
 
-        <activity android:name=".activites.pager.PagerActivity" />
+        <activity android:name=".activites.pager.add_remove_replace_pager.PagerActivity" />
         <activity android:name=".activites.pager.activity.PagerActivity"></activity>
     </application>
 

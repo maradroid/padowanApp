@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class PagerPresenterImpl implements PlayerListener, PagerPresenter{
 
-    private int tag = 0;
     private PagerView pagerView;
     private PlayerInteractor playerInteractor;
 
@@ -43,8 +42,7 @@ public class PagerPresenterImpl implements PlayerListener, PagerPresenter{
 
     @Override
     public void allYearCrimes(String startDate, String endDate, int page) {
-        playerInteractor.getAllPlayerCrimes(this, getUrl(startDate, endDate));
-        this.tag = page;
+        playerInteractor.getAllPlayerCrimes(this, getUrl(startDate, endDate), page);
     }
 
     @Override
@@ -53,9 +51,9 @@ public class PagerPresenterImpl implements PlayerListener, PagerPresenter{
     }
 
     @Override
-    public void onYearPlayerCrime(List<Player> players) {
+    public void onYearPlayerCrime(List<Player> players, int page) {
         if (players != null && !players.isEmpty())
-        pagerView.onYearlyPlayerCrime(players, tag);
+        pagerView.onYearlyPlayerCrime(players, page);
     }
 
     @Override

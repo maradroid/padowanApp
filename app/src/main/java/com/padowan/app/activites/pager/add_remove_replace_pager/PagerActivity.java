@@ -1,4 +1,4 @@
-package com.padowan.app.activites.pager;
+package com.padowan.app.activites.pager.add_remove_replace_pager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

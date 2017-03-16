@@ -11,4 +11,5 @@ public interface HomePresenter extends BasePresenter{
     void worstPlayer();
     void topCrime();
     void worstTeam();
+    void onClickCall();
 }

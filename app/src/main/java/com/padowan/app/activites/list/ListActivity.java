@@ -37,14 +37,9 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
         setContentView(R.layout.activity_player_crimes);
         ButterKnife.bind(this);
         presenter = new ListPresenterImpl(this);
+        presenter.initialize(getIntent().getStringExtra(EXTRA_TO_LIST));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        presenter.initialize(getIntent().getStringExtra(EXTRA_TO_LIST));
     }
 
     @Override

@@ -13,5 +13,5 @@ import java.util.Map;
 
 public interface PlayerInteractor extends BaseInteractor{
     void getPlayers(final BasePlayerListener listenerPlayer);
-    void getAllPlayerCrimes(PlayerListener playerListener, Map<String, String> date);
+    void getAllPlayerCrimes(PlayerListener playerListener, Map<String, String> date, int Page);
 }

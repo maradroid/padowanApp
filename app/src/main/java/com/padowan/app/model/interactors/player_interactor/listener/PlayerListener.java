@@ -12,5 +12,5 @@ import java.util.List;
  */
 
 public interface PlayerListener extends BasePlayerListener{
-    void onYearPlayerCrime(List<Player> players);
+    void onYearPlayerCrime(List<Player> players, int page);
 }

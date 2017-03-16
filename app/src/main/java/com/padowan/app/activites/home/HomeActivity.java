@@ -29,10 +29,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @BindView(R.id.tv_crime)
     TextView crimeName;
 
-    private boolean playerExe = false;
-    private boolean crimeExe = false;
-    private boolean teamExe = false;
-
     private HomePresenter presenter;
 
     @Override
@@ -51,14 +47,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
 
     @OnClick(R.id.btn_show_data)
     public void onClick(){
-        if (!playerExe && !crimeExe && !teamExe) {
-            presenter.topCrime();
-            presenter.worstPlayer();
-            presenter.worstTeam();
-            playerExe = true;
-            crimeExe = true;
-            teamExe = true;
-        }
+        presenter.onClickCall();
     }
 
     public void showErrorMessage(String error){
@@ -98,18 +87,15 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @Override
     public void onPlayer(String player) {
         playerName.setText(player);
-        playerExe = false;
     }
 
     @Override
     public void onTeam(String team) {
         teamName.setText(team);
-        teamExe = false;
     }
 
     @Override
     public void onCrime(String crime) {
         crimeName.setText(crime);
-        crimeExe = false;
     }
 }

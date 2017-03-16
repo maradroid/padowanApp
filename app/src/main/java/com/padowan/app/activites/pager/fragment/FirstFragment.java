@@ -4,9 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+
 import com.padowan.app.R;
 import com.padowan.app.activites.pager.YearsDelegate;
 import com.padowan.app.activites.pager.adapter.FragmentRecyclerViewAdapter;
@@ -17,8 +15,6 @@ import com.padowan.app.model.data_model.Player;
 
 import java.util.List;
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 import static com.padowan.app.activites.pager.fragment.presenter.FragmentPresenterImpl.TAG_PAGE;
 import static com.padowan.app.activites.pager.fragment.presenter.FragmentPresenterImpl.TAG_TITLE;
@@ -28,13 +24,11 @@ import static com.padowan.app.activites.pager.fragment.presenter.FragmentPresent
  * Created by Korisnik on 8.3.2017..
  */
 
-public class FirstFragment extends android.support.v4.app.Fragment implements FragmentYearView{
-    private Unbinder unbinder;
+public class FirstFragment extends BaseFragment implements FragmentYearView{
 
-    private YearsDelegate interfaceName;
+    private YearsDelegate yearsDelegate;
     private FragmentRecyclerViewAdapter playerAdapter;
     private FragmentPresenter presenter = new FragmentPresenterImpl(this);
-    //private BaseFragment baseFragment = new BaseFragment();
 
     @BindView(R.id.my_recycler_view_players)
     RecyclerView recyclerViewPlayers;
@@ -51,7 +45,7 @@ public class FirstFragment extends android.support.v4.app.Fragment implements Fr
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        interfaceName = (YearsDelegate) context;
+        yearsDelegate = (YearsDelegate) context;
     }
 
     @Override
@@ -65,23 +59,16 @@ public class FirstFragment extends android.support.v4.app.Fragment implements Fr
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.first_fragment, container, false);
-        unbinder = ButterKnife.bind(this, view);
-        //baseFragment.getButterKnife(view);
-        //presenter = new FragmentPresenterImpl(this);
+    public int getFragmentLayout() {
+        return R.layout.first_fragment;
+    }
+
+    @Override
+    public void someShit() {
         playerAdapter = new FragmentRecyclerViewAdapter();
         recyclerViewPlayers.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewPlayers.setAdapter(playerAdapter);
         presenter.setPageAndTitle();
-        return view;
-    }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-        //baseFragment.destroy();
-        unbinder.unbind();
     }
 
     public int getPage() {
@@ -90,6 +77,6 @@ public class FirstFragment extends android.support.v4.app.Fragment implements Fr
 
     @Override
     public void tabSelect(String startDate, String endDate, int tag) {
-        interfaceName.getDateAndTag(startDate, endDate, tag);
+        yearsDelegate.getDateAndTag(startDate, endDate, tag);
     }
 }

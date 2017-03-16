@@ -7,6 +7,7 @@ import android.os.Bundle;
  */
 
 public interface FragmentPresenter {
-    Bundle setArgs();
     int passThePage();
+    void setPageAndTitle();
+    void setPage(int page);
 }

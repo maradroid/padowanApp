@@ -12,8 +12,6 @@ import com.padowan.app.activites.pager.fragment.FirstFragment;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    public static final int  NUMBER_OF_TABS = 4;
-
     private String[] tabName  = {"2010","2011", "2012", "2013"};
 
     public ViewPagerAdapter(FragmentManager fm) {
@@ -21,7 +19,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
     @Override
-    public Fragment getItem(int position) {
+    public FirstFragment getItem(int position) {
 
         switch (position) {
             case 0:
@@ -43,7 +41,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return NUMBER_OF_TABS;
+        return tabName.length;
     }
 
     @Override

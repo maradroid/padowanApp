@@ -44,8 +44,7 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
     @Override
     protected void onStart() {
         super.onStart();
-        String name = getIntent().getStringExtra(EXTRA_TO_LIST);
-        presenter.initialize(name);
+        presenter.initialize(getIntent().getStringExtra(EXTRA_TO_LIST));
     }
 
     @Override

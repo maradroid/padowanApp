@@ -3,8 +3,12 @@ package com.padowan.app.activites.home.presenter;
 import com.padowan.app.activites.home.HomeView;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
+import com.padowan.app.model.data_model.ResponseContainer;
 import com.padowan.app.model.data_model.Team;
 import com.padowan.app.model.interactors.crime_interactor.listener.BaseCrimeListener;
+import com.padowan.app.model.interactors.home_interactor.HomeInteracotrImpl;
+import com.padowan.app.model.interactors.home_interactor.HomeInteractor;
+import com.padowan.app.model.interactors.home_interactor.listener.HomeListener;
 import com.padowan.app.model.interactors.player_interactor.PlayerInteractor;
 import com.padowan.app.model.interactors.player_interactor.PlayerInteractorImpl;
 import com.padowan.app.model.interactors.crime_interactor.CrimeInteractor;
@@ -20,55 +24,56 @@ import java.util.List;
 /**
  * Created by Mario Bat on 1.3.2017..
  */
-public class HomePresenterImpl implements HomePresenter, BasePlayerListener, TeamListener, BaseCrimeListener {
+public class HomePresenterImpl implements HomePresenter,HomeListener {
 
     private HomeView homeView;
-    private TeamInteractor teamInteractor;
-    private CrimeInteractor crimeInteractor;
-    private PlayerInteractor playerInteractor;
-    private Boolean playerExe = false;
-    private Boolean crimeExe = false;
-    private Boolean teamExe = false;
+    private HomeInteractor homeInteractor;
 
     public HomePresenterImpl(HomeView homeView) {
         this.homeView = homeView;
-        teamInteractor = new TeamInteractorImpl();
-        crimeInteractor = new CrimeInteractorImpl();
-        playerInteractor = new PlayerInteractorImpl();
-    }
-
-    public void stopCall(){
-        if (teamInteractor != null)
-            teamInteractor.stop();
-        if (crimeInteractor != null)
-            crimeInteractor.stop();
-        if (playerInteractor != null)
-            playerInteractor.stop();
-    }
-
-    //prosljeđeni interface mora biti final jer mu se pristupa iz anonimne klase
-
-    @Override
-    public void worstPlayer() {
-        playerInteractor.getPlayers(this);
+        homeInteractor = new HomeInteracotrImpl();
     }
 
     @Override
-    public void topCrime() {
-        crimeInteractor.getCrimes(this);
+    public void onDataSuccess(ResponseContainer container) {
+        if (container.getPlayer() != null && !container.getPlayer().isEmpty()) {
+            Player worstPlayer = container.getPlayer().get(0);
+            for (Player tempPlayer : container.getPlayer()) {
+                if (worstPlayer.getArrestCount() < tempPlayer.getArrestCount()) {
+                    worstPlayer = tempPlayer;
+                }
+            }
+            homeView.onPlayer(worstPlayer.getName());
+        }
+
+        if (container.getTeam() != null && !container.getTeam().isEmpty()) {
+            Team worstTeam = container.getTeam().get(0);
+            for (Team tempTeam : container.getTeam()) {
+                if (worstTeam.getArrestCount() < tempTeam.getArrestCount()) {
+                    worstTeam = tempTeam;
+                }
+            }
+            homeView.onTeam(worstTeam.getTeamName());
+        }
+        if (container.getCrime() != null && !container.getCrime().isEmpty()) {
+            Crime topCrimes = container.getCrime().get(0);
+            for (Crime tempCrime : container.getCrime()) {
+                if (topCrimes.getArrestCount() < tempCrime.getArrestCount()) {
+                    topCrimes = tempCrime;
+                }
+            }
+            homeView.onCrime(topCrimes.getCategory());
+        }
     }
+
     @Override
-    public void worstTeam() {
-        teamInteractor.getTeams(this);
+    public void worstData() {
+        homeInteractor.getData(this);
     }
 
     @Override
     public void onClickCall() {
-        if (!playerExe && !crimeExe && !teamExe){
-            topCrime();
-            worstPlayer();
-            worstTeam();
-        }
+        worstData();
     }
 
     @Override
@@ -77,44 +82,7 @@ public class HomePresenterImpl implements HomePresenter, BasePlayerListener, Tea
     }
 
     @Override
-    public void onPlayerSuccess(List<Player> player) {
-        if (player != null && !player.isEmpty()) {
-            Player worstPlayer = player.get(0);
-            for (Player tempPlayer : player) {
-                if (worstPlayer.getArrestCount() < tempPlayer.getArrestCount()) {
-                    worstPlayer = tempPlayer;
-                }
-            }
-            homeView.onPlayer(worstPlayer.getName());
-            playerExe = false;
-        }
-    }
-
-    @Override
-    public void onTeamSuccess(List<Team> team) {
-        if (team != null && !team.isEmpty()) {
-            Team worstTeam = team.get(0);
-            for (Team tempTeam : team) {
-                if (worstTeam.getArrestCount() < tempTeam.getArrestCount()) {
-                    worstTeam = tempTeam;
-                }
-            }
-            homeView.onTeam(worstTeam.getTeamName());
-            teamExe = false;
-        }
-    }
-
-    @Override
-    public void onCrimeSuccess(List<Crime> crime) {
-        if (crime != null && !crime.isEmpty()) {
-            Crime topCrimes = crime.get(0);
-            for (Crime tempCrime : crime) {
-                if (topCrimes.getArrestCount() < tempCrime.getArrestCount()) {
-                    topCrimes = tempCrime;
-                }
-            }
-            homeView.onCrime(topCrimes.getCategory());
-            crimeExe = false;
-        }
+    public void stopCall() {
+        homeInteractor.stop();
     }
 }

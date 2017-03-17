@@ -8,8 +8,6 @@ import com.padowan.app.base.BasePresenter;
  */
 
 public interface HomePresenter extends BasePresenter{
-    void worstPlayer();
-    void topCrime();
-    void worstTeam();
+    void worstData();
     void onClickCall();
 }

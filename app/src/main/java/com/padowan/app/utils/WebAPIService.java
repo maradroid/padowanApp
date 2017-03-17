@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
+import rx.Observable;
 
 /**
  * Created by Mario Bat on 1.3.2017..
@@ -25,17 +26,17 @@ public interface WebAPIService {
     String YEAR_ARREST ="player";
 
     @GET(PLAYER)
-    Call<List<Player>> readPlayer();
+    Observable<List<Player>> readPlayer();
 
     @GET(TEAM)
-    Call<List<Team>> readTeam();
+    Observable<List<Team>> readTeam();
 
     @GET(CRIME)
-    Call<List<Crime>> readCrime();
+    Observable<List<Crime>> readCrime();
 
     @GET(ALLCRIMES)
-    Call<List<Crime>> readAllCrimes(@Path("name") String name);
+    Observable<List<Crime>> readAllCrimes(@Path("name") String name);
 
     @GET(YEAR_ARREST)
-    Call<List<Player>> readPlayerYearCrimes(@QueryMap() Map<String, String> url);
+    Observable<List<Player>> readPlayerYearCrimes(@QueryMap() Map<String, String> url);
 }

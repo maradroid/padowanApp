@@ -27,7 +27,7 @@ import rx.schedulers.Schedulers;
  * Created by Korisnik on 17.3.2017..
  */
 
-public class HomeInteracotrImpl extends BaseInteractorImpl implements HomeInteractor{
+public class HomeInteracotrImpl extends BaseInteractorImpl implements HomeInteractor {
 
     private CrimeInteractor crimeInteractor = new CrimeInteractorImpl();
     private PlayerInteractor playerInteractor = new PlayerInteractorImpl();
@@ -46,22 +46,22 @@ public class HomeInteracotrImpl extends BaseInteractorImpl implements HomeIntera
         zipped.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResponseContainer>() {
-            @Override
-            public void onCompleted() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-                stop();
-                homeListener.onDataFailure("Error!");
-            }
+                    @Override
+                    public void onError(Throwable e) {
+                        stop();
+                        homeListener.onDataFailure("Error!");
+                    }
 
-            @Override
-            public void onNext(ResponseContainer container) {
-                homeListener.onDataSuccess(container);
-            }
-        });
+                    @Override
+                    public void onNext(ResponseContainer container) {
+                        homeListener.onDataSuccess(container);
+                    }
+                });
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.padowan.app.base;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Created by Korisnik on 17.3.2017..

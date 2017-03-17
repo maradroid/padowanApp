@@ -19,7 +19,6 @@ public class PagerPresenterImpl implements PlayerListener, PagerPresenter{
     private PagerView pagerView;
     private PlayerInteractor playerInteractor;
 
-
     public PagerPresenterImpl(PagerView pagerView) {
         this.pagerView = pagerView;
         playerInteractor = new PlayerInteractorImpl();

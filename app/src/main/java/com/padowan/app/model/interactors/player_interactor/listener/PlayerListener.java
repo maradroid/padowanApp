@@ -1,8 +1,5 @@
 package com.padowan.app.model.interactors.player_interactor.listener;
 
-
-import com.padowan.app.base.BaseInteractor;
-import com.padowan.app.base.BaseListener;
 import com.padowan.app.model.data_model.Player;
 
 import java.util.List;

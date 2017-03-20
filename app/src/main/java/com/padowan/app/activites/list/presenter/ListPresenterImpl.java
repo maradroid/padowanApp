@@ -71,12 +71,12 @@ public class ListPresenterImpl implements CrimeListener, TeamListener, ListPrese
     @Override
     public void onCrimeSuccess(List<Crime> allCrimes) {
         if (allCrimes != null && !allCrimes.isEmpty()) {
-            Collections.sort(allCrimes, new Comparator<Crime>() {
-                @Override
-                public int compare(Crime o1, Crime o2) {
-                    return o1.getCategory().compareTo(o2.getCategory());
-                }
-            });
+                Collections.sort(allCrimes, new Comparator<Crime>() {
+                    @Override
+                    public int compare(Crime o1, Crime o2) {
+                        return o1.getCategory().compareTo(o2.getCategory());
+                    }
+                });
             List<ListRecyclerWraper> recyclerList = new ArrayList<>();
             char firstLetter = '$';
             for (Crime crimes : allCrimes) {

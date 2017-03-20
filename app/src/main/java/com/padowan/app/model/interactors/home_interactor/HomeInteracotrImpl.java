@@ -36,14 +36,12 @@ public class HomeInteracotrImpl extends BaseInteractorImpl implements HomeIntera
 
     @Override
     public void getData(final HomeListener homeListener) {
-        Observable<ResponseContainer> zipped = Observable.zip(crimeInteractor.getCrimesObservable(), playerInteractor.getPlayerObservable(), teamInteractor.getTeamObservable(), new Func3<List<Crime>, List<Player>, List<Team>, ResponseContainer>() {
+        addSubscription(Observable.zip(crimeInteractor.getCrimesObservable(), playerInteractor.getPlayerObservable(), teamInteractor.getTeamObservable(), new Func3<List<Crime>, List<Player>, List<Team>, ResponseContainer>() {
             @Override
             public ResponseContainer call(List<Crime> crimes, List<Player> playerList, List<Team> teams) {
                 return new ResponseContainer(teams, crimes, playerList);
             }
-        });
-
-        zipped.subscribeOn(Schedulers.io())
+        }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResponseContainer>() {
                     @Override
@@ -54,14 +52,14 @@ public class HomeInteracotrImpl extends BaseInteractorImpl implements HomeIntera
                     @Override
                     public void onError(Throwable e) {
                         stop();
-                        homeListener.onDataFailure("Error!");
+                        homeListener.onDataFailure(e.getMessage());
                     }
 
                     @Override
                     public void onNext(ResponseContainer container) {
                         homeListener.onDataSuccess(container);
                     }
-                });
+                }));
     }
 
     @Override

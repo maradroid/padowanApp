@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyHolder> {
 
     private List<Crime> crimeList = new ArrayList<>();
+    private List<Player> playerList = new ArrayList<>();
 
     private RecyclerClickListener listener;
 
@@ -36,7 +37,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
-        holder.tvAllCrimes.setText(crimeList.get(position).getCategory());
+        //holder.tvAllCrimes.setText(crimeList.get(position).getCategory());
+        holder.tvAllCrimes.setText(playerList.get(position).getName());
     }
 
     @Override
@@ -48,6 +50,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         if(crimeList != null && !crimeList.isEmpty()){
             this.crimeList.clear();
             this.crimeList.addAll(crimeList);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setDataPlayer(List<Player> playerlist){
+        if(playerlist != null && !playerlist.isEmpty()){
+            this.playerList.clear();
+            this.playerList.addAll(playerlist);
             notifyDataSetChanged();
         }
     }

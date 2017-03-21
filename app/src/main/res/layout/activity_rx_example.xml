@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.padowan.app.activites.rx_example.RxExampleActivity">
+    tools:context="com.padowan.app.activites.rx_example.RxListActivity">
 
     <Button
         android:id="@+id/btn_rx_list_of_players"

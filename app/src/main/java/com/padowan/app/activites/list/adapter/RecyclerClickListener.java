@@ -11,4 +11,5 @@ import com.padowan.app.model.data_model.Team;
 public interface RecyclerClickListener {
     void onRecyclerClick(Crime crime);
     void onRecyclerClickTeam(Team team);
+    void onRecyclerClickPlayer(Player player);
 }

@@ -15,6 +15,7 @@ import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
 import com.padowan.app.activites.list.presenter.ListPresenter;
 import com.padowan.app.activites.list.presenter.ListPresenterImpl;
 import com.padowan.app.model.data_model.Crime;
+import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
 import java.util.List;
 import butterknife.BindView;
@@ -77,6 +78,11 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
     @Override
     public void onRecyclerClickTeam(Team team) {
         Toast.makeText(this, "Crimes: " + team.getArrestCount(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRecyclerClickPlayer(Player player) {
+        return ;
     }
 
     @Override

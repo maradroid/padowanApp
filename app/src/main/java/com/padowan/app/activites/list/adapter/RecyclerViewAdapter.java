@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyHolder> {
 
     private List<Crime> crimeList = new ArrayList<>();
-    private List<Player> playerList = new ArrayList<>();
+    //private List<Player> playerList = new ArrayList<>();
 
     private RecyclerClickListener listener;
 
@@ -37,8 +37,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
-        //holder.tvAllCrimes.setText(crimeList.get(position).getCategory());
-        holder.tvAllCrimes.setText(playerList.get(position).getName());
+        holder.tvAllCrimes.setText(crimeList.get(position).getCategory());
+        //holder.tvAllCrimes.setText(playerList.get(position).getName());
     }
 
     @Override
@@ -54,13 +54,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
     }
 
-    public void setDataPlayer(List<Player> playerlist){
+    /*public void setDataPlayer(List<Player> playerlist){
         if(playerlist != null && !playerlist.isEmpty()){
             this.playerList.clear();
             this.playerList.addAll(playerlist);
             notifyDataSetChanged();
         }
-    }
+    }*/
 
      class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -77,6 +77,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public void onClick(View v) {
             if (listener != null) {
                 listener.onRecyclerClick(crimeList.get(getAdapterPosition()));
+                //listener.onRecyclerClickPlayer(playerList.get(getAdapterPosition()));
             }
         }
     }

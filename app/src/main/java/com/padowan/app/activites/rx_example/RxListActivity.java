@@ -9,8 +9,9 @@ import android.util.Log;
 import com.padowan.app.R;
 import com.padowan.app.activites.list.adapter.RecyclerClickListener;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
-import com.padowan.app.activites.rx_example.presenter.RxExamplePresenter;
-import com.padowan.app.activites.rx_example.presenter.RxExamplePresenterImpl;
+import com.padowan.app.activites.rx_example.presenter.RxListPresenter;
+import com.padowan.app.activites.rx_example.presenter.RxListPresenterImpl;
+import com.padowan.app.activites.rx_subject.presenter.RxSubjectBus;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
@@ -21,13 +22,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RxExampleActivity extends AppCompatActivity implements RxExampleView, RecyclerClickListener {
+public class RxListActivity extends AppCompatActivity implements RxListView, RecyclerClickListener {
 
+    public final static String EXTRA_TO_RX_EXAMPLE = "";
 
     @BindView(R.id.my_rx_recycler_view)
     RecyclerView mRecyclerView;
 
-    private RxExamplePresenter presenter;
+    private RxListPresenter presenter;
     private RecyclerViewAdapter adapter;
 
     @Override
@@ -35,13 +37,13 @@ public class RxExampleActivity extends AppCompatActivity implements RxExampleVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rx_example);
         ButterKnife.bind(this);
-        presenter = new RxExamplePresenterImpl(this);
+        presenter = new RxListPresenterImpl(this);
         adapter = new RecyclerViewAdapter();
         adapter.setListener(this);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
-
+        presenter.getPlayers();
     }
 
     @Override
@@ -89,7 +91,13 @@ public class RxExampleActivity extends AppCompatActivity implements RxExampleVie
 
     @Override
     public void onPlayer(List<Player> playerList) {
-        adapter.setDataPlayer(playerList);
+        /*if(adapter != null)
+            adapter.setDataPlayer(playerList);*/
+    }
+
+    @Override
+    public void onRecyclerClickPlayer(Player player) {
+        RxSubjectBus.send(player);
     }
 
     @Override

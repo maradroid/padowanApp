@@ -1,5 +1,6 @@
 package com.padowan.app.activites.home.presenter;
 
+import com.padowan.app.activites.home.HomeModule;
 import com.padowan.app.activites.home.HomeView;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
@@ -9,17 +10,24 @@ import com.padowan.app.model.interactors.home_interactor.HomeInteracotrImpl;
 import com.padowan.app.model.interactors.home_interactor.HomeInteractor;
 import com.padowan.app.model.interactors.home_interactor.listener.HomeListener;
 
+import javax.inject.Inject;
+
+import dagger.Module;
+
 /**
  * Created by Mario Bat on 1.3.2017..
  */
+
 public class HomePresenterImpl implements HomePresenter,HomeListener {
 
     private HomeView homeView;
     private HomeInteractor homeInteractor;
 
-    public HomePresenterImpl(HomeView homeView) {
+    @Inject
+    public HomePresenterImpl(HomeView homeView, HomeInteractor homeInteractor) {
         this.homeView = homeView;
-        homeInteractor = new HomeInteracotrImpl();
+        this.homeInteractor = homeInteractor;
+        //homeInteractor = new HomeInteracotrImpl();
     }
 
     @Override

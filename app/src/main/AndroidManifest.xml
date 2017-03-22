@@ -29,7 +29,7 @@
 
         </activity>
         <activity android:name=".activites.list.ListActivity" />
-        <activity android:name=".activites.pager.add_remove_replace_pager.PagerActivity" />
+        <activity android:name=".activites.pager.add_remove_replace_pager.PagerActivityAddRemoveDelete" />
         <activity android:name=".activites.pager.activity.PagerActivity" />
         <activity android:name=".activites.rx_example.RxListActivity"></activity>
     </application>

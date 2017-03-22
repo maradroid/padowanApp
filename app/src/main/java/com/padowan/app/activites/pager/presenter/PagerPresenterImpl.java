@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 /**
  * Created by Korisnik on 9.3.2017..
  */
@@ -19,9 +21,11 @@ public class PagerPresenterImpl implements PlayerListener, PagerPresenter{
     private PagerView pagerView;
     private PlayerInteractor playerInteractor;
 
-    public PagerPresenterImpl(PagerView pagerView) {
+    @Inject
+    public PagerPresenterImpl(PagerView pagerView, PlayerInteractor playerInteractor) {
         this.pagerView = pagerView;
-        playerInteractor = new PlayerInteractorImpl();
+        this.playerInteractor = playerInteractor;
+        //playerInteractor = new PlayerInteractorImpl();
     }
 
     private Map<String, String> getUrl(String startDate, String endDate){

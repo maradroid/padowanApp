@@ -14,10 +14,14 @@ import com.padowan.app.activites.list.adapter.RecyclerViewAdapterCrimes;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
 import com.padowan.app.activites.list.presenter.ListPresenter;
 import com.padowan.app.activites.list.presenter.ListPresenterImpl;
+import com.padowan.app.base.BaseAplication;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
 import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -27,17 +31,22 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
 
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
+
     private RecyclerViewAdapter playerAdapter;
     private RecyclerViewAdapterCrimes crimesAdapter;
     private RecyclerViewAdapterTeams teamsAdapter;
-    private ListPresenter presenter;
+    @Inject
+    ListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_crimes);
         ButterKnife.bind(this);
-        presenter = new ListPresenterImpl(this);
+        BaseAplication.get(this).getAppComponent()
+                .plus(new ListModule(this))
+                .inject(this);
+
         presenter.initialize(getIntent().getStringExtra(EXTRA_TO_LIST));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);

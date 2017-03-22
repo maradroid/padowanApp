@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.padowan.app.activites.pager.add_remove_replace_pager.PagerActivity">
+    tools:context="com.padowan.app.activites.pager.add_remove_replace_pager.PagerActivityAddRemoveDelete">
 
     <FrameLayout
         android:id="@+id/fragment_containter"

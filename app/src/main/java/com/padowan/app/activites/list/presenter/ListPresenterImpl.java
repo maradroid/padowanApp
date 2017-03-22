@@ -17,6 +17,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by Korisnik on 3.3.2017..
  */
@@ -32,10 +34,13 @@ public class ListPresenterImpl implements CrimeListener, TeamListener, ListPrese
 
     private List<ListRecyclerWraper> crimeListWraper;
 
-    public ListPresenterImpl(ListView listView) {
+    @Inject
+    public ListPresenterImpl(ListView listView, CrimeInteractor crimeInteractor, TeamInteractor teamInteractor) {
         this.listView = listView;
-        teamInteractor = new TeamInteractorImpl();
-        crimeInteractor = new CrimeInteractorImpl();
+        this.crimeInteractor = crimeInteractor;
+        this.teamInteractor = teamInteractor;
+        /*teamInteractor = new TeamInteractorImpl();
+        crimeInteractor = new CrimeInteractorImpl();*/
     }
 
     @Override

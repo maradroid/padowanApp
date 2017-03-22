@@ -10,7 +10,7 @@ import com.padowan.app.activites.pager.fragment.FragmentB;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PagerActivity extends AppCompatActivity {
+public class PagerActivityAddRemoveDelete extends AppCompatActivity {
 
     public static  final String TAG_KEY_PAGER = "key1";
 

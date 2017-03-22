@@ -8,9 +8,11 @@ import android.widget.Toast;
 
 import com.padowan.app.R;
 import com.padowan.app.activites.home.presenter.HomePresenter;
-import com.padowan.app.activites.home.presenter.HomePresenterImpl;
 import com.padowan.app.activites.list.ListActivity;
 import com.padowan.app.activites.pager.activity.PagerActivity;
+import com.padowan.app.base.BaseAplication;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,14 +31,17 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
     @BindView(R.id.tv_crime)
     TextView crimeName;
 
-    private HomePresenter presenter;
+    @Inject
+    HomePresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        presenter = new HomePresenterImpl(this);
+        BaseAplication.get(this).getAppComponent()
+                .plus(new HomeModule(this))
+                .inject(this);
     }
 
     @Override

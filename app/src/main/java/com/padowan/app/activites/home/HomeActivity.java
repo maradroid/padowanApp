@@ -39,9 +39,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        BaseAplication.get(this).getAppComponent()
+        /*BaseAplication.get(this).getAppComponent()
                 .plus(new HomeModule(this))
-                .inject(this);
+                .inject(this);*/
     }
 
     @Override

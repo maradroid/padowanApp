@@ -44,7 +44,7 @@ public class PagerActivity extends AppCompatActivity implements PagerView, Years
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         ButterKnife.bind(this);
-        BaseAplication.get(this).getAppComponent().plus(new PagerModule(this)).inject(this);
+        /*BaseAplication.get(this).getAppComponent().plus(new PagerModule(this)).inject(this);*/
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);

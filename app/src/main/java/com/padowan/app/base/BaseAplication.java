@@ -34,8 +34,8 @@ public class BaseAplication extends Application {
     }
 
     public void initAppComponents() {
-        baseComponent = DaggerBaseLayerComponent.builder()
-                .baseLayerModule(new ServiceModule(this))
-                .build();
+        /*baseComponent = DaggerBaseLayerComponent.builder()
+                .baseLayerModule(new ServiceModule())
+                .build();*/
     }
 }

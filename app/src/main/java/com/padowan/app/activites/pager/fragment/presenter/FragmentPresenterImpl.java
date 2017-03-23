@@ -4,12 +4,14 @@ import android.app.Fragment;
 
 import com.padowan.app.activites.pager.fragment.FragmentYearView;
 
+import javax.inject.Inject;
+
 
 /**
  * Created by Korisnik on 15.3.2017..
  */
 
-public class FragmentPresenterImpl extends Fragment implements FragmentPresenter{
+public class FragmentPresenterImpl implements FragmentPresenter{
 
     public static final String TAG_PAGE = "page";
     public static final String TAG_TITLE = "title";
@@ -21,6 +23,7 @@ public class FragmentPresenterImpl extends Fragment implements FragmentPresenter
     private int page = 0;
     private FragmentYearView fragmentYearView;
 
+    @Inject
     public FragmentPresenterImpl(FragmentYearView fragmentYearView) {
         this.fragmentYearView = fragmentYearView;
     }

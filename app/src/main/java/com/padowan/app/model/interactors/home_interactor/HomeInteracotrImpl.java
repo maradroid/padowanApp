@@ -16,6 +16,8 @@ import com.padowan.app.model.interactors.team_interactor.TeamInteractorImpl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,11 +30,16 @@ import rx.schedulers.Schedulers;
  */
 
 public class HomeInteracotrImpl extends BaseInteractorImpl implements HomeInteractor {
+    @Inject
+    CrimeInteractor crimeInteractor;
+    @Inject
+    PlayerInteractor playerInteractor;
+    @Inject
+    TeamInteractor teamInteractor;
 
-    private CrimeInteractor crimeInteractor = new CrimeInteractorImpl();
-    private PlayerInteractor playerInteractor = new PlayerInteractorImpl();
-    private TeamInteractor teamInteractor = new TeamInteractorImpl();
-
+    @Inject
+    public HomeInteracotrImpl() {
+    }
 
     @Override
     public void getData(final HomeListener homeListener) {

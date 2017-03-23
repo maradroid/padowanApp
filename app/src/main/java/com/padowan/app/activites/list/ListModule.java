@@ -9,6 +9,11 @@ import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
 import com.padowan.app.activites.list.presenter.ListPresenter;
 import com.padowan.app.activites.list.presenter.ListPresenterImpl;
 import com.padowan.app.base.PerActivity;
+import com.padowan.app.model.interactors.crime_interactor.CrimeInteractor;
+import com.padowan.app.model.interactors.crime_interactor.CrimeInteractorImpl;
+import com.padowan.app.model.interactors.team_interactor.TeamInteractor;
+import com.padowan.app.model.interactors.team_interactor.TeamInteractorImpl;
+import com.padowan.app.utils.ServiceModule;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,7 +24,7 @@ import dagger.Provides;
 @Module
 public class ListModule {
 
-    private ListView listView;
+    public final ListView listView;
 
     public ListModule(ListView listView) {
         this.listView = listView;
@@ -33,26 +38,32 @@ public class ListModule {
 
     @Provides
     @PerActivity
-    RecyclerView provideRecyclerView (RecyclerView recyclerView){
-        return recyclerView;
+    TeamInteractor provideTeamInteracotr(TeamInteractorImpl teamInteractor) {
+        return teamInteractor;
     }
 
     @Provides
     @PerActivity
-    RecyclerViewAdapter provideRecyclerViewAdapter(RecyclerViewAdapter recyclerViewAdapter){
-        return  recyclerViewAdapter;
+    CrimeInteractor provideCrimeInteractor(CrimeInteractorImpl crimeInteractor) {
+        return crimeInteractor;
     }
 
     @Provides
     @PerActivity
-    RecyclerViewAdapterTeams provideRecyclerViewAdapterTeams(RecyclerViewAdapterTeams recyclerViewAdapterTeams){
-        return recyclerViewAdapterTeams;
+    RecyclerViewAdapter provideRecyclerViewAdapter(){
+        return new RecyclerViewAdapter();
     }
 
     @Provides
     @PerActivity
-    RecyclerViewAdapterCrimes providesRecyclerViewAdapterCrimes(RecyclerViewAdapterCrimes recyclerViewAdapterCrimes){
-        return recyclerViewAdapterCrimes;
+    RecyclerViewAdapterTeams provideRecyclerViewAdapterTeams(){
+        return new RecyclerViewAdapterTeams();
+    }
+
+    @Provides
+    @PerActivity
+    RecyclerViewAdapterCrimes providesRecyclerViewAdapterCrimes(){
+        return new RecyclerViewAdapterCrimes();
     }
 
     @Provides

@@ -11,6 +11,7 @@ import com.padowan.app.model.interactors.crime_interactor.listener.CrimeListener
 import com.padowan.app.model.interactors.team_interactor.TeamInteractor;
 import com.padowan.app.model.interactors.team_interactor.TeamInteractorImpl;
 import com.padowan.app.model.interactors.team_interactor.listener.TeamListener;
+import com.padowan.app.utils.ServiceModule;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,8 +40,6 @@ public class ListPresenterImpl implements CrimeListener, TeamListener, ListPrese
         this.listView = listView;
         this.crimeInteractor = crimeInteractor;
         this.teamInteractor = teamInteractor;
-        /*teamInteractor = new TeamInteractorImpl();
-        crimeInteractor = new CrimeInteractorImpl();*/
     }
 
     @Override

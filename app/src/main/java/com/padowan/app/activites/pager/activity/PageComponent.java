@@ -12,7 +12,7 @@ import dagger.Subcomponent;
 
 @PerActivity
 @Subcomponent (modules = PagerModule.class)
-public interface PagerSubComponent {
+public interface PageComponent {
 
     void inject (PagerActivity pagerActivity);
 }

@@ -8,12 +8,16 @@ import android.support.v7.widget.RecyclerView;
 import com.padowan.app.R;
 import com.padowan.app.activites.pager.YearsDelegate;
 import com.padowan.app.activites.pager.adapter.FragmentRecyclerViewAdapter;
+import com.padowan.app.activites.pager.fragment.presenter.FragmentModule;
 import com.padowan.app.activites.pager.fragment.presenter.FragmentPresenter;
-import com.padowan.app.activites.pager.fragment.presenter.FragmentPresenterImpl;
+import com.padowan.app.base.BaseApplication;
 import com.padowan.app.base.BaseFragment;
 import com.padowan.app.model.data_model.Player;
 
 import java.util.List;
+
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 import static com.padowan.app.activites.pager.fragment.presenter.FragmentPresenterImpl.TAG_PAGE;
@@ -26,9 +30,11 @@ import static com.padowan.app.activites.pager.fragment.presenter.FragmentPresent
 
 public class FirstFragment extends BaseFragment implements FragmentYearView{
 
-    private YearsDelegate yearsDelegate;
-    private FragmentRecyclerViewAdapter playerAdapter;
-    private FragmentPresenter presenter = new FragmentPresenterImpl(this);
+    YearsDelegate yearsDelegate;
+    @Inject
+    FragmentRecyclerViewAdapter playerAdapter;
+    @Inject
+    FragmentPresenter presenter;
 
     @BindView(R.id.my_recycler_view_players)
     RecyclerView recyclerViewPlayers;
@@ -51,6 +57,9 @@ public class FirstFragment extends BaseFragment implements FragmentYearView{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BaseApplication.get(getActivity()).getAppComponent()
+                .plus(new FragmentModule(this))
+                .inject(this);
         presenter.setPage(getArguments().getInt(TAG_PAGE, 0));
     }
 
@@ -64,8 +73,8 @@ public class FirstFragment extends BaseFragment implements FragmentYearView{
     }
 
     @Override
-    public void someShit() {
-        playerAdapter = new FragmentRecyclerViewAdapter();
+    public void setPagerAndAdapter() {
+        //playerAdapter = new FragmentRecyclerViewAdapter();
         recyclerViewPlayers.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewPlayers.setAdapter(playerAdapter);
         presenter.setPageAndTitle();

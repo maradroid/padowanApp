@@ -9,6 +9,7 @@ import com.padowan.app.model.data_model.Team;
 import com.padowan.app.model.interactors.home_interactor.HomeInteracotrImpl;
 import com.padowan.app.model.interactors.home_interactor.HomeInteractor;
 import com.padowan.app.model.interactors.home_interactor.listener.HomeListener;
+import com.padowan.app.utils.ServiceModule;
 
 import javax.inject.Inject;
 

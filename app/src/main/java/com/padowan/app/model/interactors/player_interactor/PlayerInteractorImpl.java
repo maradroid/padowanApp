@@ -5,9 +5,12 @@ import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.interactors.player_interactor.listener.BasePlayerListener;
 import com.padowan.app.model.interactors.player_interactor.listener.PlayerListener;
 import com.padowan.app.utils.RetroUtil;
+import com.padowan.app.utils.WebAPIService;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -19,6 +22,13 @@ import rx.schedulers.Schedulers;
  */
 
 public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerInteractor {
+
+    @Inject
+    WebAPIService webAPIService;
+
+    @Inject
+    public PlayerInteractorImpl() {
+    }
 
     @Override
     public void getPlayers(final BasePlayerListener listenerPlayer) {
@@ -70,12 +80,12 @@ public class PlayerInteractorImpl extends BaseInteractorImpl implements PlayerIn
 
     @Override
     public Observable<List<Player>> getPlayerObservable() {
-        return RetroUtil.getService().readPlayer();
+        return webAPIService.readPlayer();
     }
 
     @Override
     public Observable<List<Player>> getPlayerYearCrime(Map<String, String> date) {
-        return RetroUtil.getService().readPlayerYearCrimes(date);
+        return webAPIService.readPlayerYearCrimes(date);
     }
 
     @Override

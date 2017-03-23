@@ -20,7 +20,7 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(getFragmentLayout(), container, false);
         unbinder  = ButterKnife.bind(this, view);
-        someShit();
+        setPagerAndAdapter();
         return view;
     }
 
@@ -31,6 +31,6 @@ public abstract class BaseFragment extends android.support.v4.app.Fragment {
     }
 
     public abstract int getFragmentLayout();
-    public abstract void someShit();
+    public abstract void setPagerAndAdapter();
 
 }

@@ -4,12 +4,13 @@ import com.padowan.app.base.BaseInteractorImpl;
 import com.padowan.app.model.data_model.Team;
 import com.padowan.app.model.interactors.team_interactor.listener.TeamListener;
 import com.padowan.app.utils.RetroUtil;
+import com.padowan.app.utils.ServiceModule;
+import com.padowan.app.utils.WebAPIService;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -21,9 +22,16 @@ import rx.schedulers.Schedulers;
 
 public class TeamInteractorImpl extends BaseInteractorImpl implements TeamInteractor {
 
+    @Inject
+    WebAPIService webAPIService;
+
+    @Inject
+    public TeamInteractorImpl() {
+    }
+
     @Override
     public void getTeams(final TeamListener listenerTeam) {
-        addSubscription(RetroUtil.getService().readTeam()
+        addSubscription(getTeamObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<Team>>() {
@@ -47,7 +55,7 @@ public class TeamInteractorImpl extends BaseInteractorImpl implements TeamIntera
 
     @Override
     public Observable<List<Team>> getTeamObservable() {
-        return RetroUtil.getService().readTeam();
+        return webAPIService.readTeam();
     }
 
     @Override

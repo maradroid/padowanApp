@@ -1,9 +1,7 @@
 package com.padowan.app.base;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.support.test.espresso.DaggerBaseLayerComponent;
 
 import com.padowan.app.utils.ServiceModule;
 
@@ -11,13 +9,10 @@ import com.padowan.app.utils.ServiceModule;
  * Created by Korisnik on 22.3.2017..
  */
 
-public class BaseAplication extends Application {
+public class BaseApplication extends Application {
 
     private BaseComponent baseComponent;
-
-    public static BaseAplication get(Activity activity){
-        return (BaseAplication) activity.getApplication();
-    }
+    private ServiceModule serviceModule;
 
     @Override
     public void onCreate(){
@@ -25,8 +20,8 @@ public class BaseAplication extends Application {
         initAppComponents();
     }
 
-    public static BaseAplication get (Context context){
-        return (BaseAplication) context.getApplicationContext();
+    public static BaseApplication get (Context context){
+        return (BaseApplication) context.getApplicationContext();
     }
 
     public BaseComponent getAppComponent(){
@@ -34,8 +29,12 @@ public class BaseAplication extends Application {
     }
 
     public void initAppComponents() {
-        /*baseComponent = DaggerBaseComponent.builder()
+        baseComponent = DaggerBaseComponent.builder()
                 .serviceModule(new ServiceModule())
-                .build();*/
+                .build();
+    }
+
+    public  ServiceModule getService(){
+        return serviceModule;
     }
 }

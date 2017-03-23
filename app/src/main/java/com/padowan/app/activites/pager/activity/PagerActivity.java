@@ -13,7 +13,7 @@ import com.padowan.app.activites.pager.YearsDelegate;
 import com.padowan.app.activites.pager.adapter.ViewPagerAdapter;
 import com.padowan.app.activites.pager.fragment.FirstFragment;
 import com.padowan.app.activites.pager.presenter.PagerPresenterImpl;
-import com.padowan.app.base.BaseAplication;
+import com.padowan.app.base.BaseApplication;
 import com.padowan.app.model.data_model.Player;
 
 import java.util.List;
@@ -44,7 +44,9 @@ public class PagerActivity extends AppCompatActivity implements PagerView, Years
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_pager);
         ButterKnife.bind(this);
-        /*BaseAplication.get(this).getAppComponent().plus(new PagerModule(this)).inject(this);*/
+        BaseApplication.get(this).getAppComponent()
+                .plus(new PagerModule(this))
+                .inject(this);
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);

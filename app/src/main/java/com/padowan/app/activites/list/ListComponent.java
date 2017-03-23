@@ -11,7 +11,7 @@ import dagger.Subcomponent;
  */
 @PerActivity
 @Subcomponent(modules = ListModule.class)
-public interface ListSubComponent {
+public interface ListComponent {
 
     void inject(ListActivity listActivity);
 }

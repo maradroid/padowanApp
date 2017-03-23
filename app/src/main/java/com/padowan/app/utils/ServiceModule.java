@@ -13,13 +13,13 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 
 @Module
-public class ServiceModule {
+public class ServiceModule{
 
     private static final String BASE_URL = "http://nflarrest.com/api/v1/";
 
     @Singleton
     @Provides
-    public  WebAPIService getService(Retrofit retrofit){
+    public WebAPIService getService(Retrofit retrofit){
         return retrofit.create(WebAPIService.class);
     }
 

@@ -1,16 +1,23 @@
 package com.padowan.app.model.interactors.crime_interactor;
 
+import com.padowan.app.base.BaseApplication;
+import com.padowan.app.base.BaseInteractor;
 import com.padowan.app.base.BaseInteractorImpl;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.interactors.crime_interactor.listener.BaseCrimeListener;
 import com.padowan.app.model.interactors.crime_interactor.listener.CrimeListener;
 import com.padowan.app.utils.RetroUtil;
+import com.padowan.app.utils.ServiceModule;
+import com.padowan.app.utils.WebAPIService;
+
 import java.util.List;
 
+import javax.inject.Inject;
+
+import retrofit2.Retrofit;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -18,6 +25,13 @@ import rx.schedulers.Schedulers;
  */
 
 public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInteractor {
+
+    @Inject
+    WebAPIService webAPIService;
+
+    @Inject
+    public CrimeInteractorImpl() {
+    }
 
     @Override
     public void getAllCrimes(final CrimeListener crimeListener, String name) {
@@ -70,12 +84,13 @@ public class CrimeInteractorImpl extends BaseInteractorImpl implements CrimeInte
 
     @Override
     public Observable<List<Crime>> getCrimesObservable() {
-        return RetroUtil.getService().readCrime();
+
+        return webAPIService.readCrime();
     }
 
     @Override
     public Observable<List<Crime>> getAllCrimesObservable(String name) {
-        return RetroUtil.getService().readAllCrimes(name);
+        return webAPIService.readAllCrimes(name);
     }
 
     @Override

@@ -13,8 +13,7 @@ import com.padowan.app.activites.list.adapter.RecyclerViewAdapter;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterCrimes;
 import com.padowan.app.activites.list.adapter.RecyclerViewAdapterTeams;
 import com.padowan.app.activites.list.presenter.ListPresenter;
-import com.padowan.app.activites.list.presenter.ListPresenterImpl;
-import com.padowan.app.base.BaseAplication;
+import com.padowan.app.base.BaseApplication;
 import com.padowan.app.model.data_model.Crime;
 import com.padowan.app.model.data_model.Player;
 import com.padowan.app.model.data_model.Team;
@@ -32,9 +31,12 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
     @BindView(R.id.my_recycler_view)
     RecyclerView mRecyclerView;
 
-    private RecyclerViewAdapter playerAdapter;
-    private RecyclerViewAdapterCrimes crimesAdapter;
-    private RecyclerViewAdapterTeams teamsAdapter;
+    @Inject
+    RecyclerViewAdapter playerAdapter;
+    @Inject
+    RecyclerViewAdapterCrimes crimesAdapter;
+    @Inject
+    RecyclerViewAdapterTeams teamsAdapter;
     @Inject
     ListPresenter presenter;
 
@@ -43,9 +45,9 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_crimes);
         ButterKnife.bind(this);
-        /*BaseAplication.get(this).getAppComponent()
+        BaseApplication.get(this).getAppComponent()
                 .plus(new ListModule(this))
-                .inject(this);*/
+                .inject(this);
 
         presenter.initialize(getIntent().getStringExtra(EXTRA_TO_LIST));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -54,21 +56,18 @@ public class ListActivity extends AppCompatActivity implements ListView, Recycle
 
     @Override
     public void chooseCrimesAdapter() {
-        crimesAdapter = new RecyclerViewAdapterCrimes();
         crimesAdapter.setListener(this);
         mRecyclerView.setAdapter(crimesAdapter);
     }
 
     @Override
     public void chooseTemasAdapter() {
-        teamsAdapter = new RecyclerViewAdapterTeams();
         teamsAdapter.setListener(this);
         mRecyclerView.setAdapter(teamsAdapter);
     }
 
     @Override
     public void choosePlayerCriemsAdapter() {
-        playerAdapter = new RecyclerViewAdapter();
         playerAdapter.setListener(this);
         mRecyclerView.setAdapter(playerAdapter);
     }

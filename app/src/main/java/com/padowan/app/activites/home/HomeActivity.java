@@ -10,7 +10,7 @@ import com.padowan.app.R;
 import com.padowan.app.activites.home.presenter.HomePresenter;
 import com.padowan.app.activites.list.ListActivity;
 import com.padowan.app.activites.pager.activity.PagerActivity;
-import com.padowan.app.base.BaseAplication;
+import com.padowan.app.base.BaseApplication;
 
 import javax.inject.Inject;
 
@@ -39,9 +39,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        /*BaseAplication.get(this).getAppComponent()
+        BaseApplication.get(this).getAppComponent()
                 .plus(new HomeModule(this))
-                .inject(this);*/
+                .inject(this);
     }
 
     @Override

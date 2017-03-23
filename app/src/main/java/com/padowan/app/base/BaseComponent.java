@@ -21,9 +21,8 @@ import javax.inject.Singleton;
  * Created by Korisnik on 21.3.2017..
  */
 @Singleton
-@Component (modules = ServiceModule.class)
+@Component(modules = ServiceModule.class)
 public interface BaseComponent {
-
     HomeSubComponent plus (HomeModule module);
     ListSubComponent plus (ListModule module);
     PagerSubComponent plus (PagerModule module);
